@@ -59,8 +59,8 @@ See RESOURCE-STDLIB.md for documentation and usage examples
 
 # CONTRIBUTORS
 
-   Jeremy Schulman, @nwkautomaniac
-   Derick Winkworth, @cloudtoad
+  * Jeremy Schulman, @nwkautomaniac
+  * Derick Winkworth, @cloudtoad
 
 # LICENSES
 
