@@ -46,16 +46,14 @@ node "myswitch1234.mycorp.com" {
 # DEPENDENCIES
 
   * Puppet 2.7.19
-  * Ruby Gem netconf 0.2.5
 
 # INSTALLATION ON PUPPET-MASTER
 
-  * gem install netconf
   * puppet module install netdevops-netdev-stdlib 
 
 # RESOURCE TYPES
 
-See RESOURCE-STDLIB.md for documentation and usage examples
+  See RESOURCE-STDLIB.md for documentation and usage examples
 
 # CONTRIBUTORS
 
