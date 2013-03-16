@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # OVERVIEW
 
 Netdev is a vendor-neutral network abstraction framework developed by Juniper Networks 
@@ -65,3 +66,9 @@ See RESOURCE-STDLIB.md for documentation and usage examples
 # LICENSES
 
    BSD-2, See LICENSE file
+=======
+puppet-netdev-stdlib
+====================
+
+Netdev is a vendor-neutral network abstraction framework developed by Juniper Networks and contributed freely to the DevOps community.  This repo contains the type definitions only.
+>>>>>>> 8ca8bc95c52cbfee3701e4849370811a7d98682d
