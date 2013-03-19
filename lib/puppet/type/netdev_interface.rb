@@ -18,6 +18,7 @@ Puppet::Type.newtype(:netdev_interface) do
   @doc = "Network Device Physical Interface"
 
   ensurable
+  feature :activable, "The ability to activate/deactive configuration"  
 
   ##### -------------------------------------------------------------    
   ##### Parameters
@@ -31,7 +32,7 @@ Puppet::Type.newtype(:netdev_interface) do
   ##### Properties
   ##### -------------------------------------------------------------  
   
-  newproperty( :active ) do
+  newproperty( :active, :required_features => :activable ) do
     desc "Config activation"
     defaultto(:true)
     newvalues(:true, :false)
