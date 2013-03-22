@@ -49,7 +49,7 @@ node "myswitch1234.mycorp.com" {
 
 # INSTALLATION ON PUPPET-MASTER
 
-  * puppet module install netdevops-netdev-stdlib 
+  * puppet module install netdevops/netdev_stdlib 
 
 # RESOURCE TYPES
 
