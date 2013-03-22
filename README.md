@@ -1,6 +1,6 @@
 # OVERVIEW
 
-Netdev is a vendor-neutral network abstraction framework developed by Juniper Networks 
+NOTE:  NOT YET IN PUPPET-FORGE - Netdev is a vendor-neutral network abstraction framework developed by Juniper Networks 
 and contributed freely to the DevOps community
 
 # EXAMPLE USAGE
