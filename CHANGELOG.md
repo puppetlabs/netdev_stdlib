@@ -6,3 +6,6 @@
 
 ### 2013-03-19
 * 0.9.1 - added 'feature' controls to type definitions
+
+### 2013-03-25
+* 1.0.0 - updated README for multi-vendor example
