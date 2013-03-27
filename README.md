@@ -18,7 +18,7 @@ class puppet_switch_ports {
        $uplink_lag = "ae0"
        $uplink_lag_ports = [ 'ge-0/0/2', 'ge-0/0/3' ]
      }
-     eos: {
+     EOS: {
        $db_port = "Ethernet1"
        $web_port = "Ethernet2"
        $uplink_lag = "Port-Channel1"
