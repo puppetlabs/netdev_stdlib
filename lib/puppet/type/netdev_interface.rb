@@ -54,9 +54,9 @@ Puppet::Type.newtype(:netdev_interface) do
   end
   
   newproperty( :speed ) do
-    desc "Link speed [auto*|10m|100m|1g|10g]"
+    desc "Link speed [auto*|10m|100m|1g|10g|40g|56g|100g]"
     defaultto( :auto )
-    newvalues( :auto,"1g","10g","100m","10m" )    
+    newvalues( :auto,"1g","10g","40g","56g","100g","100m","10m" )
   end
   
   newproperty( :duplex ) do
