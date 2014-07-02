@@ -3,7 +3,7 @@
 * Author         : Jeremy Schulman
 * File           : puppet/type/netdev_device.rb
 * Version        : 2012-11-11
-* Description    : 
+* Description    :
 *
 *    This file contains the Type definition for the network
 *    device.  This type exists so that the network device
@@ -15,15 +15,14 @@
 
 Puppet::Type.newtype(:netdev_device) do
   @doc = "Network device resource to support autorequire relationships"
-  
+
   ensurable
-  
+
   ##### -------------------------------------------------------------
   ##### Parameters
-  ##### -------------------------------------------------------------  
-  
+  ##### -------------------------------------------------------------
+
   newparam(:name, :namevar=>true) do
     desc "The network device name can be any placeholder value"
-  end  
-      
+  end
 end
