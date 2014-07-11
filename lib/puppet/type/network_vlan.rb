@@ -24,4 +24,8 @@ Puppet::Type.newtype(:network_vlan) do
   newproperty(:id) do
     desc "The VLAN ID, e.g. 100"
   end
+
+  newproperty(:shutdown) do
+    desc "VLAN shutdown if true, not shutdown if false"
+  end
 end
