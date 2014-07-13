@@ -41,25 +41,13 @@ Puppet::Type.newtype(:network_vlan) do
   newproperty(:id) do
     desc "The VLAN ID, e.g. 100"
 
-    munge do |value|
-      case value
-      when String
-        value.to_i
-      else
-        value
-      end
-    end
+    munge { |v| Integer(v) }
 
-    validate do |value|
-      case value
-      when Fixnum, "0"
-        true
-      when String
-        if value.to_i == 0
-          self.error "value #{value.inspect} is invalid, must be a number"
-        end
-      else
-        self.error "value #{value.inspect} is invalid, must be a number"
+    validate do |v|
+      begin
+        !! Integer(v)
+      rescue TypeError => err
+        self.error "Cannot convert #{v.inspect} to an integer: #{err.message}"
       end
     end
   end
