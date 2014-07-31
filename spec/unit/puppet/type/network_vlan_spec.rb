@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Puppet::Type.type(:network_vlan) do
   let(:catalog) { Puppet::Resource::Catalog.new }
-  let(:vlan) { described_class.new(:name => "vlan100", :catalog => catalog) }
+  let(:vlan) { described_class.new(:name => "100", :catalog => catalog) }
 
   describe "ensure" do
     let(:attribute) { :ensure }
@@ -17,12 +17,12 @@ describe Puppet::Type.type(:network_vlan) do
     end
   end
 
-  describe "name" do
-    let(:attribute) { :name }
+  describe "vlan_name" do
+    let(:attribute) { :vlan_name }
     subject { described_class.attrclass(attribute) }
 
-    it "is a param" do
-      expect(described_class.attrtype(attribute)).to eq(:param)
+    it "is a param (because id is the namevar)" do
+      expect(described_class.attrtype(attribute)).to eq(:property)
     end
 
     it "has documentation" do
@@ -36,10 +36,12 @@ describe Puppet::Type.type(:network_vlan) do
       end
     end
 
-    [0, [1], {:two => :three}].each do |val|
-      it "rejects #{val.inspect}" do
-        expect { vlan[attribute] = val }.to raise_error Puppet::ResourceError
-      end
+    it "rejects [1]" do
+      expect { vlan[:vlan_name] = [1] }.to raise_error Puppet::ResourceError
+    end
+
+    it 'rejects {two: :three}' do
+      expect { vlan[:vlan_name] = {two: :three} }.to raise_error Puppet::ResourceError
     end
   end
 
@@ -73,8 +75,8 @@ describe Puppet::Type.type(:network_vlan) do
     let(:attribute) { :id }
     subject { described_class.attrclass(attribute) }
 
-    it "is a property" do
-      expect(described_class.attrtype(attribute)).to eq(:property)
+    it "is a parameter" do
+      expect(described_class.attrtype(attribute)).to eq(:param)
     end
 
     it "has documentation" do
@@ -82,21 +84,11 @@ describe Puppet::Type.type(:network_vlan) do
       expect(subject.doc.gsub(%r{\s+}, '')).not_to be_empty
     end
 
-    [100, "100", " 100", " 100 ", "100 ", "0"].each do |val|
-      it "munges #{val.inspect} to 100" do
+    [100, "100"].each do |val|
+      it "validates #{val.inspect} as isomorphic to '100'"  do
         vlan[attribute] = val
-        expect(vlan[attribute]).to eq(val.to_i)
+        expect(vlan[attribute]).to eq(val.to_s)
       end
-    end
-
-    it "munges [1] to 1" do
-      vlan[attribute] = [1]
-      expect(vlan[attribute]).to eq(1)
-    end
-
-    it "munges [1,2] to 1" do
-      vlan[attribute] = [1,2]
-      expect(vlan[attribute]).to eq(1)
     end
 
     [{:two => :three}, "abc"].each do |val|
@@ -120,16 +112,16 @@ describe Puppet::Type.type(:network_vlan) do
     end
 
     [true, "true", :true].each do |val|
-      it "munges #{val.inspect} to true" do
+      it "munges #{val.inspect} to :true" do
         vlan[attribute] = val
-        expect(vlan[attribute]).to eq(true)
+        expect(vlan[attribute]).to eq(:true)
       end
     end
 
     [false, "false", :false].each do |val|
-      it "munges #{val.inspect} to false" do
+      it "munges #{val.inspect} to :false" do
         vlan[attribute] = val
-        expect(vlan[attribute]).to eq(false)
+        expect(vlan[attribute]).to eq(:false)
       end
     end
 
