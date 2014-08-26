@@ -13,10 +13,8 @@ Puppet::Type.newtype(:network_interface) do
 
     validate do |value|
       case value
-      when String
-        super(value)
-      else
-        self.fail "value #{value.inspect} is invalid, must be a string."
+      when String then super(value)
+      else self.fail "value #{value.inspect} is invalid, must be a String."
       end
     end
   end

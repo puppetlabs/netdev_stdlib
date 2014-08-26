@@ -6,6 +6,8 @@ describe Puppet::Type.type(:network_interface) do
     described_class.new(:name => "Ethernet1", :catalog => catalog)
   end
 
+  it_behaves_like 'name is the namevar'
+
   describe 'enable' do
     let(:attribute) { :enable }
     subject { described_class.attrclass(attribute) }
@@ -21,32 +23,6 @@ describe Puppet::Type.type(:network_interface) do
     %w{true false}.each do |val|
       it "accepts #{val.inspect}" do
         type[attribute] = val
-      end
-    end
-  end
-
-  describe "name" do
-    let(:attribute) { :name }
-    subject { described_class.attrclass(attribute) }
-
-    it "is a param" do
-      expect(described_class.attrtype(attribute)).to eq(:param)
-    end
-
-    it "has documentation" do
-      # Remove all whitespace to see if there's actually content
-      expect(subject.doc.gsub(%r{\s+}, '')).not_to be_empty
-    end
-
-    ["Engineering"].each do |val|
-      it "accepts #{val.inspect}" do
-        type[attribute] = val
-      end
-    end
-
-    [0, [1], {:two => :three}].each do |val|
-      it "rejects #{val.inspect}" do
-        expect { type[attribute] = val }.to raise_error Puppet::ResourceError
       end
     end
   end
