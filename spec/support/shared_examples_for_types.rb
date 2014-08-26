@@ -1,5 +1,17 @@
 # encoding: utf-8
 
+RSpec.shared_examples 'property' do
+  it 'is a property' do
+    expect(described_class.attrtype(attribute)).to eq(:property)
+  end
+end
+
+RSpec.shared_examples 'parameter' do
+  it 'is a parameter' do
+    expect(described_class.attrtype(attribute)).to eq(:param)
+  end
+end
+
 RSpec.shared_examples 'an ensurable type' do
   describe 'ensure' do
     let(:catalog) { Puppet::Resource::Catalog.new }
@@ -10,13 +22,8 @@ RSpec.shared_examples 'an ensurable type' do
     let(:attribute) { :ensure }
     subject { described_class.attrclass(attribute) }
 
-    it 'is a property' do
-      expect(described_class.attrtype(:ensure)).to eq(:property)
-    end
-
-    it 'has documentation' do
-      expect(subject.doc).to be_a_kind_of(String)
-    end
+    include_examples 'property'
+    include_examples '#doc Documentation'
 
     %w(absent present).each do |val|
       it "accepts #{val.inspect}" do
@@ -274,5 +281,27 @@ RSpec.shared_examples 'enabled type' do
 
     include_examples '#doc Documentation'
     include_examples 'boolean value'
+  end
+end
+
+RSpec.shared_examples 'string value' do
+  ['Engineering'].each do |val|
+    it "accepts #{val.inspect}" do
+      type[attribute] = val
+    end
+  end
+
+  [0, [1], { two: :three }].each do |val|
+    it "rejects #{val.inspect}" do
+      expect { type[attribute] = val }
+        .to raise_error Puppet::ResourceError, /is invalid, must be a String/
+    end
+  end
+
+  [%w(Marketing Sales)].each do |val|
+    it "munges #{val.inspect} to #{val.first.inspect}" do
+      type[attribute] = val
+      expect(type[attribute]).to eq(val.first)
+    end
   end
 end
