@@ -23,3 +23,5 @@ puppet-acceptance/
 .ruby-version
 .ruby-gemset
 /tmp/
+/coverage/
+.DS_Store
