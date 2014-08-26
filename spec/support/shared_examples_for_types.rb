@@ -37,6 +37,10 @@ RSpec.shared_examples 'boolean parameter' do
     expect(described_class.attrtype(attribute)).to eq(:param)
   end
 
+  include_examples 'boolean value'
+end
+
+RSpec.shared_examples 'boolean value' do
   [true, false, 'true', 'false', :true, :false].each do |val|
     it "accepts #{val.inspect}" do
       type[attribute] = val
@@ -48,7 +52,7 @@ RSpec.shared_examples 'boolean parameter' do
     end
   end
 
-  [1, -1, { foo: 1 }, [true], 'baz', nil].each do |val|
+  [1, -1, { foo: 1 }, [1], 'baz', nil].each do |val|
     it "rejects #{val.inspect} with Puppet::Error" do
       expect { type[attribute] = val }.to raise_error Puppet::Error
     end
@@ -251,5 +255,24 @@ RSpec.shared_examples 'flowcontrol property' do
     it "rejects #{val.inspect} with Puppet::ResourceError" do
       expect { type[attribute] = val }.to raise_error Puppet::ResourceError
     end
+  end
+end
+
+RSpec.shared_examples 'enabled type' do
+  describe 'enable' do
+    let(:catalog) { Puppet::Resource::Catalog.new }
+    let(:type) do
+      described_class.new(name: 'emanon', catalog: catalog)
+    end
+
+    let(:attribute) { :enable }
+    subject { described_class.attrclass(attribute) }
+
+    it 'is a property' do
+      expect(described_class.attrtype(attribute)).to eq(:property)
+    end
+
+    include_examples '#doc Documentation'
+    include_examples 'boolean value'
   end
 end
