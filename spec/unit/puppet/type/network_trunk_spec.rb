@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'shared_examples_for_types'
 
-describe Puppet::Type.type(:l2_interface) do
+describe Puppet::Type.type(:network_trunk) do
   it_behaves_like 'an ensurable type'
   it_behaves_like 'name is the namevar'
 
