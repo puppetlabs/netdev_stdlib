@@ -4,5 +4,4 @@ require 'puppet'
 require 'rspec-puppet'
 require 'puppetlabs_spec_helper/module_spec_helper'
 
-RSpec.configure do |config|
-end
+Dir["#{dir}/support/**/*.rb"].sort.each { |f| require f}
