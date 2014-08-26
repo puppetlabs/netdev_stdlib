@@ -169,6 +169,21 @@ RSpec.shared_examples 'interface list value' do
   end
 end
 
+RSpec.shared_examples 'array of strings value' do
+  ['foo', 'bar', 'foo bar baz'].each do |val|
+    it "accepts #{val.inspect}" do
+      type[attribute] = val
+      expect(type[attribute]).to eq([val])
+    end
+  end
+
+  [-1, 4096, 8192, { foo: 1 }, true, false, nil].each do |val|
+    it "rejects #{val.inspect} with a Puppet::Error" do
+      expect { type[attribute] = val }.to raise_error Puppet::Error
+    end
+  end
+end
+
 RSpec.shared_examples 'numeric parameter' do
   [1, 2, 3, 4095].each do |val|
     it "accepts #{val.inspect}" do
