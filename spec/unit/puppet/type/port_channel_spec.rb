@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
 describe Puppet::Type.type(:port_channel) do
@@ -5,7 +7,7 @@ describe Puppet::Type.type(:port_channel) do
   it_behaves_like 'name is the namevar'
 
   let(:catalog) { Puppet::Resource::Catalog.new }
-  let(:type) { described_class.new(:name => 'emanon', :catalog => catalog) }
+  let(:type) { described_class.new(name: 'emanon', catalog: catalog) }
 
   subject { described_class.attrclass(attribute) }
 
@@ -37,7 +39,7 @@ describe Puppet::Type.type(:port_channel) do
     include_examples '#doc Documentation'
     include_examples 'rejected parameter values'
 
-    %w{active passive disabled}.each do |val|
+    %w(active passive disabled).each do |val|
       it "munges #{val.inspect} to #{val.intern.inspect}" do
         type[attribute] = val
         expect(type[attribute]).to eq(val.intern)

@@ -1,15 +1,18 @@
+# encoding: utf-8
+# rubocop:disable Style/PredicateName
+
 Puppet::Type.newtype(:network_trunk) do
   @doc = 'Ethernet logical (switch-port) interface.  Configures VLAN trunking.'
 
   ensurable
 
-  newparam(:name, :namevar => true) do
+  newparam(:name, namevar: true) do
     desc 'The switch interface name, e.g. "Ethernet1"'
 
     validate do |value|
       case value
       when String then super(value)
-      else self.fail "value #{value.inspect} is invalid, must be a String."
+      else fail "value #{value.inspect} is invalid, must be a String."
       end
     end
   end
@@ -28,18 +31,18 @@ Puppet::Type.newtype(:network_trunk) do
     desc 'VLAN used for untagged VLAN traffic. a.k.a Native VLAN'
 
     validate do |value|
-      if not value.between?(1,4095)
-        self.fail "value #{value.inspect} is not between 1 and 4095"
+      unless value.between?(1, 4095)
+        fail "value #{value.inspect} is not between 1 and 4095"
       end
     end
   end
 
-  newproperty(:tagged_vlans, :array_matching => :all) do
+  newproperty(:tagged_vlans, array_matching: :all) do
     desc 'Array of VLAN names used for tagged packets'
 
     validate do |value|
-      if not value.between?(1,4095)
-        self.fail "value #{value.inspect} is not between 1 and 4095"
+      unless value.between?(1, 4095)
+        fail "value #{value.inspect} is not between 1 and 4095"
       end
     end
 
@@ -56,12 +59,12 @@ Puppet::Type.newtype(:network_trunk) do
     end
   end
 
-  newproperty(:pruned_vlans, :array_matching => :all) do
+  newproperty(:pruned_vlans, array_matching: :all) do
     desc 'Array of VLAN ID numbers used for VLAN pruning'
 
     validate do |value|
-      if not value.between?(1,4095)
-        self.fail "value #{value.inspect} is not between 1 and 4095"
+      unless value.between?(1, 4095)
+        fail "value #{value.inspect} is not between 1 and 4095"
       end
     end
 

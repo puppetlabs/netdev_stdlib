@@ -1,8 +1,10 @@
+# encoding: utf-8
+
 RSpec.shared_examples 'an ensurable type' do
   describe 'ensure' do
     let(:catalog) { Puppet::Resource::Catalog.new }
     let(:type) do
-      described_class.new(:name => 'emanon', :catalog => catalog)
+      described_class.new(name: 'emanon', catalog: catalog)
     end
 
     let(:attribute) { :ensure }
@@ -16,13 +18,13 @@ RSpec.shared_examples 'an ensurable type' do
       expect(subject.doc).to be_a_kind_of(String)
     end
 
-    %w{absent present}.each do |val|
+    %w(absent present).each do |val|
       it "accepts #{val.inspect}" do
         type[attribute] = val
       end
     end
 
-    %w{true false}.each do |val|
+    %w(true false).each do |val|
       it "rejects #{val.inspect}" do
         expect { type[attribute] = val }.to raise_error Puppet::ResourceError
       end
@@ -46,7 +48,7 @@ RSpec.shared_examples 'boolean parameter' do
     end
   end
 
-  [1, -1, {foo: 1}, [true], 'baz', nil].each do |val|
+  [1, -1, { foo: 1 }, [true], 'baz', nil].each do |val|
     it "rejects #{val.inspect} with Puppet::Error" do
       expect { type[attribute] = val }.to raise_error Puppet::Error
     end
@@ -57,7 +59,7 @@ RSpec.shared_examples 'name is the namevar' do
   describe 'name' do
     let(:catalog) { Puppet::Resource::Catalog.new }
     let(:type) do
-      described_class.new(:name => 'emanon', :catalog => catalog)
+      described_class.new(name: 'emanon', catalog: catalog)
     end
 
     let(:attribute) { :name }
@@ -75,7 +77,7 @@ RSpec.shared_examples 'name is the namevar' do
       end
     end
 
-    [0, ['Marketing', 'Sales'], {:two => :three}].each do |val|
+    [0, %w(Marketing Sales), { two: :three }].each do |val|
       it "rejects #{val.inspect}" do
         expect { type[attribute] = val }
           .to raise_error Puppet::ResourceError, /is invalid, must be a String/
@@ -89,8 +91,8 @@ RSpec.shared_examples '#doc Documentation' do
     expect(subject.doc).to be_a_kind_of(String)
   end
 
-  it "#doc is not only whitespace" do
-    expect(subject.doc.gsub(%r{\s+}, '')).not_to be_empty
+  it '#doc is not only whitespace' do
+    expect(subject.doc.gsub(/\s+/, '')).not_to be_empty
   end
 end
 
@@ -109,12 +111,12 @@ RSpec.shared_examples 'vlan id value' do
     end
   end
 
-  it 'munges [10,20] to 10' do
-    type[attribute] = [10,20]
+  it 'munges [10, 20] to 10' do
+    type[attribute] = [10, 20]
     expect(type[attribute]).to eq(10)
   end
 
-  [-1, 4096, 8192, "asdf", {foo: 1}, true, false, nil].each do |val|
+  [-1, 4096, 8192, 'asdf', { foo: 1 }, true, false, nil].each do |val|
     it "rejects #{val.inspect} with a Puppet::Error" do
       expect { type[attribute] = val }.to raise_error Puppet::Error
     end
@@ -129,12 +131,12 @@ RSpec.shared_examples 'vlan range value' do
     end
   end
 
-  it 'munges [10,20] to [10,20]' do
-    type[attribute] = [10,20]
-    expect(type[attribute]).to eq([10,20])
+  it 'munges [10, 20] to [10, 20]' do
+    type[attribute] = [10, 20]
+    expect(type[attribute]).to eq([10, 20])
   end
 
-  [-1, 4096, 8192, "asdf", {foo: 1}, true, false, nil].each do |val|
+  [-1, 4096, 8192, 'asdf', { foo: 1 }, true, false, nil].each do |val|
     it "rejects #{val.inspect} with a Puppet::Error" do
       expect { type[attribute] = val }.to raise_error Puppet::Error
     end
@@ -149,7 +151,7 @@ RSpec.shared_examples 'interface list value' do
     end
   end
 
-  [-1, 4096, 8192, "asdf", {foo: 1}, true, false, nil].each do |val|
+  [-1, 4096, 8192, 'asdf', { foo: 1 }, true, false, nil].each do |val|
     it "rejects #{val.inspect} with a Puppet::Error" do
       expect { type[attribute] = val }.to raise_error Puppet::Error
     end
@@ -157,20 +159,20 @@ RSpec.shared_examples 'interface list value' do
 end
 
 RSpec.shared_examples 'numeric parameter' do
-  [1,2,3,4095].each do |val|
+  [1, 2, 3, 4095].each do |val|
     it "accepts #{val.inspect}" do
       type[attribute] = val
       expect(type[attribute]).to eq(val)
     end
   end
 
-  it 'munges [1,2] to 1' do
-    type[attribute] = [1,2]
+  it 'munges [1, 2] to 1' do
+    type[attribute] = [1, 2]
     expect(type[attribute]).to eq(1)
   end
 
   it 'munges "1" to 1' do
-    type[attribute] = "1"
+    type[attribute] = '1'
     expect(type[attribute]).to eq(1)
   end
 end
@@ -186,7 +188,7 @@ RSpec.shared_examples 'description property' do
     end
   end
 
-  [0, [1], {:two => :three}].each do |val|
+  [0, [1], { two: :three }].each do |val|
     it "rejects #{val.inspect}" do
       expect { type[attribute] = val }.to raise_error Puppet::ResourceError
     end
@@ -198,13 +200,13 @@ RSpec.shared_examples 'speed property' do
     expect(described_class.attrtype(attribute)).to eq(:property)
   end
 
-  %w{auto 1g 10g 40g 56g 100g 100m 10m}.each do |val|
+  %w(auto 1g 10g 40g 56g 100g 100m 10m).each do |val|
     it "accepts #{val.inspect}" do
       type[attribute] = val
     end
   end
 
-  [0, 15, "0", "15", {:two => :three}, "abc"].each do |val|
+  [0, 15, '0', '15', { two: :three }, 'abc'].each do |val|
     it "rejects #{val.inspect} with Puppet::ResourceError" do
       expect { type[attribute] = val }.to raise_error Puppet::ResourceError
     end
@@ -216,13 +218,13 @@ RSpec.shared_examples 'duplex property' do
     expect(described_class.attrtype(attribute)).to eq(:property)
   end
 
-  %w{auto full half}.each do |val|
+  %w(auto full half).each do |val|
     it "accepts #{val.inspect}" do
       type[attribute] = val
     end
   end
 
-  [0, 15, '0', '15', {:two => :three}, 'abc'].each do |val|
+  [0, 15, '0', '15', { two: :three }, 'abc'].each do |val|
     it "rejects #{val.inspect} with Puppet::ResourceError" do
       expect { type[attribute] = val }.to raise_error Puppet::ResourceError
     end
@@ -234,7 +236,7 @@ RSpec.shared_examples 'flowcontrol property' do
     expect(described_class.attrtype(attribute)).to eq(:property)
   end
 
-  %w{desired on off}.each do |val|
+  %w(desired on off).each do |val|
     it "accepts #{val.inspect}" do
       type[attribute] = val
     end
@@ -245,7 +247,7 @@ RSpec.shared_examples 'flowcontrol property' do
     end
   end
 
-  [0, 15, '0', '15', {:two => :three}, 'abc'].each do |val|
+  [0, 15, '0', '15', { two: :three }, 'abc'].each do |val|
     it "rejects #{val.inspect} with Puppet::ResourceError" do
       expect { type[attribute] = val }.to raise_error Puppet::ResourceError
     end

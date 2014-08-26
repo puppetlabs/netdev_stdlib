@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
 describe Puppet::Type.type(:network_trunk) do
@@ -5,7 +7,7 @@ describe Puppet::Type.type(:network_trunk) do
   it_behaves_like 'name is the namevar'
 
   let(:catalog) { Puppet::Resource::Catalog.new }
-  let(:type) { described_class.new(:name => 'emanon', :catalog => catalog) }
+  let(:type) { described_class.new(name: 'emanon', catalog: catalog) }
 
   describe 'encapsulation' do
     let(:attribute) { :encapsulation }
@@ -14,7 +16,7 @@ describe Puppet::Type.type(:network_trunk) do
     include_examples '#doc Documentation'
     include_examples 'rejected parameter values'
 
-    %w{dot1q isl negotiate none}.each do |val|
+    %w(dot1q isl negotiate none).each do |val|
       it "accepts #{val.inspect}" do
         type[attribute] = val
       end
@@ -28,7 +30,7 @@ describe Puppet::Type.type(:network_trunk) do
     include_examples '#doc Documentation'
     include_examples 'rejected parameter values'
 
-    %w{access trunk dynamic_auto dynamic_desirable}.each do |val|
+    %w(access trunk dynamic_auto dynamic_desirable).each do |val|
       it "accepts #{val.inspect}" do
         type[attribute] = val
       end
