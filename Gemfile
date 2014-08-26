@@ -13,6 +13,8 @@ end
 group :development do
   gem 'guard'
   gem 'guard-rspec', :require => false
+  gem 'guard-rubocop'
+  gem 'pry-doc'
 end
 
 group :development, :test do
