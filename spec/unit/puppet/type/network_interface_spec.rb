@@ -6,11 +6,12 @@ describe Puppet::Type.type(:network_interface) do
     described_class.new(:name => "Ethernet1", :catalog => catalog)
   end
 
+  subject { described_class.attrclass(attribute) }
+
   it_behaves_like 'name is the namevar'
 
   describe 'enable' do
     let(:attribute) { :enable }
-    subject { described_class.attrclass(attribute) }
 
     it 'is a property' do
       expect(described_class.attrtype(attribute)).to eq(:property)
@@ -29,7 +30,6 @@ describe Puppet::Type.type(:network_interface) do
 
   describe "description" do
     let(:attribute) { :description }
-    subject { described_class.attrclass(attribute) }
 
     it "is a property" do
       expect(described_class.attrtype(attribute)).to eq(:property)
@@ -55,7 +55,6 @@ describe Puppet::Type.type(:network_interface) do
 
   describe "mtu (e.g. 1500 | 9000)" do
     let(:attribute) { :mtu }
-    subject { described_class.attrclass(attribute) }
 
     it "is a property" do
       expect(described_class.attrtype(attribute)).to eq(:property)
@@ -92,53 +91,15 @@ describe Puppet::Type.type(:network_interface) do
 
   describe "speed (auto*|10m|100m|1g|10g|40g|56g|100g)" do
     let(:attribute) { :speed }
-    subject { described_class.attrclass(attribute) }
 
-    it "is a property" do
-      expect(described_class.attrtype(attribute)).to eq(:property)
-    end
-
-    it "has documentation" do
-      # Remove all whitespace to see if there's actually content
-      expect(subject.doc.gsub(%r{\s+}, '')).not_to be_empty
-    end
-
-    %w{auto 1g 10g 40g 56g 100g 100m 10m}.each do |val|
-      it "accepts #{val}" do
-        type[attribute] = val
-      end
-    end
-
-    [0, 15, "0", "15", {:two => :three}, "abc"].each do |val|
-      it "rejects #{val.inspect} as invalid" do
-        expect { type[attribute] = val }.to raise_error Puppet::ResourceError
-      end
-    end
+    include_examples '#doc Documentation'
+    include_examples 'speed property'
   end
 
   describe "duplex (auto | full | half)" do
     let(:attribute) { :duplex }
-    subject { described_class.attrclass(attribute) }
 
-    it "is a property" do
-      expect(described_class.attrtype(attribute)).to eq(:property)
-    end
-
-    it "has documentation" do
-      # Remove all whitespace to see if there's actually content
-      expect(subject.doc.gsub(%r{\s+}, '')).not_to be_empty
-    end
-
-    %w{auto full half}.each do |val|
-      it "accepts #{val}" do
-        type[attribute] = val
-      end
-    end
-
-    [0, 15, "0", "15", {:two => :three}, "abc"].each do |val|
-      it "rejects #{val.inspect} as invalid" do
-        expect { type[attribute] = val }.to raise_error Puppet::ResourceError
-      end
-    end
+    include_examples '#doc Documentation'
+    include_examples 'duplex property'
   end
 end

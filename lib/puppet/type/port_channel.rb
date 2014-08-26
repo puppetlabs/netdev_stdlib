@@ -1,74 +1,85 @@
-=begin
-* Puppet Module  : netdev
-* Author         : Jeremy Schulman
-* File           : puppet/type/netdev_lag.rb
-* Version        : 2012-11-11
-* Description    :
-*
-*    This file contains the Type definition for the network
-*    Link Aggregation Group (LAG).
-*
-=end
-
-Puppet::Type.newtype(:netdev_lag) do
-  @doc = "Network Device Link Aggregation Group"
+Puppet::Type.newtype(:port_channel) do
+  @doc = 'Network Device Link Aggregation Group'
 
   ensurable
-  feature :activable, "The ability to activate/deactive configuration"
 
-  ##### -------------------------------------------------------------
-  ##### Parameters
-  ##### -------------------------------------------------------------
-
-  newparam( :name, :namevar=>true ) do
+  newparam(:name, namevar: true) do
     desc "LAG Name"
+
+    validate do |value|
+      case value
+      when String then super(value)
+      else self.fail "value #{value.inspect} is invalid, must be a String."
+      end
+    end
   end
 
-  ##### -------------------------------------------------------------
-  ##### Properties
-  ##### -------------------------------------------------------------
-
-  newproperty( :active, :required_features => :activable ) do
-    desc "Config activation"
-    defaultto( :true )
-    newvalues( :true, :false )
+  newparam(:force) do
+    desc 'Force configuration (true / false)'
+    newvalues(:true, :false)
   end
 
-  newproperty( :lacp ) do
-    desc "LACP [ passive | active | disabled* ]"
-    defaultto( :disabled )
-    newvalues( :active, :passive, :disabled )
+  newproperty(:id) do
+    desc 'Channel Group ID, e.g. 10'
+    munge { |v| Integer(v) }
   end
 
-  newproperty( :minimum_links ) do
-    desc "Number of active links required for LAG to be 'up'"
-    defaultto( 0 )
-    munge { |v| Integer( v ) }
+  newproperty(:description) do
+    desc 'Port Channel description'
+
+    validate do |value|
+      if String === value
+        super(value)
+        validate_features_per_value(value)
+      else
+        self.fail "value #{value.inspect} is invalid, must be a string."
+      end
+    end
   end
 
-  newproperty( :links, :array_matching => :all ) do
-    desc "Array of Physical Interfaces"
+  newproperty(:mode) do
+    desc 'LACP mode [ passive | active | disabled* ]'
+    newvalues(:active, :passive, :disabled)
+  end
 
-    munge { |v|  Array( v ) }
+  newproperty(:minimum_links) do
+    desc 'Number of active links required for LAG to be up'
+    munge { |v| Integer(v) }
+  end
 
-    # the order of the array elements is not important
-    # so we need to do a sort-compare
-    def insync?( is )
-      is.sort == @should.sort.map(&:to_s)
+  newproperty(:interfaces, :array_matching => :all) do
+    desc 'Array of Physical Interfaces'
+
+    validate do |val|
+      if not String === val
+        self.fail "value #{val.inspect} must be a string"
+      end
+      if not /\d+/.match(val)
+        self.fail "value #{val.inspect} does not contain any digits"
+      end
     end
 
+    def insync?(is)
+      is.sort == @should.sort.map(&:to_s)
+    end
   end
 
-  ##### -------------------------------------------------------------
-  ##### Auto require the netdev_device resource -
-  #####   There must be one netdev_device resource defined in the
-  #####   catalog, it doesn't matter what the name of the device is,
-  #####   just that one exists.
-  ##### -------------------------------------------------------------
+  newproperty(:speed) do
+    desc "Link speed [auto*|10m|100m|1g|10g|40g|56g|100g]"
+    newvalues(:auto,"1g","10g","40g","56g","100g","100m","10m")
+  end
 
-  autorequire(:netdev_device) do
-    netdev = catalog.resources.select{ |r| r.type == :netdev_device }[0]
-    raise "No netdev_device found in catalog" unless netdev
-    netdev.title   # returns the name of the netdev_device resource
+  newproperty(:duplex) do
+    desc "Duplex mode [auto*|full|half]"
+    newvalues(:auto, :full, :half)
+  end
+
+  newproperty(:flowcontrol_send) do
+    desc "Flow control (send) [desired|on|off]"
+    newvalues(:desired, :on, :off)
+  end
+  newproperty(:flowcontrol_receive) do
+    desc "Flow control (receive) [desired|on|off]"
+    newvalues(:desired, :on, :off)
   end
 end
