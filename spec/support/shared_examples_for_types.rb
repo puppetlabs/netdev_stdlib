@@ -1,5 +1,17 @@
 # encoding: utf-8
 
+RSpec.shared_examples 'property' do
+  it 'is a property' do
+    expect(described_class.attrtype(attribute)).to eq(:property)
+  end
+end
+
+RSpec.shared_examples 'parameter' do
+  it 'is a parameter' do
+    expect(described_class.attrtype(attribute)).to eq(:param)
+  end
+end
+
 RSpec.shared_examples 'an ensurable type' do
   describe 'ensure' do
     let(:catalog) { Puppet::Resource::Catalog.new }
@@ -10,13 +22,8 @@ RSpec.shared_examples 'an ensurable type' do
     let(:attribute) { :ensure }
     subject { described_class.attrclass(attribute) }
 
-    it 'is a property' do
-      expect(described_class.attrtype(:ensure)).to eq(:property)
-    end
-
-    it 'has documentation' do
-      expect(subject.doc).to be_a_kind_of(String)
-    end
+    include_examples 'property'
+    include_examples '#doc Documentation'
 
     %w(absent present).each do |val|
       it "accepts #{val.inspect}" do
@@ -37,6 +44,10 @@ RSpec.shared_examples 'boolean parameter' do
     expect(described_class.attrtype(attribute)).to eq(:param)
   end
 
+  include_examples 'boolean value'
+end
+
+RSpec.shared_examples 'boolean value' do
   [true, false, 'true', 'false', :true, :false].each do |val|
     it "accepts #{val.inspect}" do
       type[attribute] = val
@@ -48,7 +59,7 @@ RSpec.shared_examples 'boolean parameter' do
     end
   end
 
-  [1, -1, { foo: 1 }, [true], 'baz', nil].each do |val|
+  [1, -1, { foo: 1 }, [1], 'baz', nil].each do |val|
     it "rejects #{val.inspect} with Puppet::Error" do
       expect { type[attribute] = val }.to raise_error Puppet::Error
     end
@@ -158,6 +169,21 @@ RSpec.shared_examples 'interface list value' do
   end
 end
 
+RSpec.shared_examples 'array of strings value' do
+  ['foo', 'bar', 'foo bar baz'].each do |val|
+    it "accepts #{val.inspect}" do
+      type[attribute] = val
+      expect(type[attribute]).to eq([val])
+    end
+  end
+
+  [-1, 4096, 8192, { foo: 1 }, true, false, nil].each do |val|
+    it "rejects #{val.inspect} with a Puppet::Error" do
+      expect { type[attribute] = val }.to raise_error Puppet::Error
+    end
+  end
+end
+
 RSpec.shared_examples 'numeric parameter' do
   [1, 2, 3, 4095].each do |val|
     it "accepts #{val.inspect}" do
@@ -250,6 +276,68 @@ RSpec.shared_examples 'flowcontrol property' do
   [0, 15, '0', '15', { two: :three }, 'abc'].each do |val|
     it "rejects #{val.inspect} with Puppet::ResourceError" do
       expect { type[attribute] = val }.to raise_error Puppet::ResourceError
+    end
+  end
+end
+
+RSpec.shared_examples 'enabled type' do
+  describe 'enable' do
+    let(:catalog) { Puppet::Resource::Catalog.new }
+    let(:type) do
+      described_class.new(name: 'emanon', catalog: catalog)
+    end
+
+    let(:attribute) { :enable }
+    subject { described_class.attrclass(attribute) }
+
+    it 'is a property' do
+      expect(described_class.attrtype(attribute)).to eq(:property)
+    end
+
+    include_examples '#doc Documentation'
+    include_examples 'boolean value'
+  end
+end
+
+RSpec.shared_examples 'string value' do
+  ['Engineering'].each do |val|
+    it "accepts #{val.inspect}" do
+      type[attribute] = val
+    end
+  end
+
+  [0, [1], { two: :three }].each do |val|
+    it "rejects #{val.inspect}" do
+      expect { type[attribute] = val }
+        .to raise_error Puppet::ResourceError, /is invalid, must be a String/
+    end
+  end
+
+  [%w(Marketing Sales)].each do |val|
+    it "munges #{val.inspect} to #{val.first.inspect}" do
+      type[attribute] = val
+      expect(type[attribute]).to eq(val.first)
+    end
+  end
+end
+
+RSpec.shared_examples 'rejects values' do |values|
+  [*values].each do |val|
+    it "rejects #{val.inspect} with a Puppet::Error" do
+      expect { type[attribute] = val }.to raise_error Puppet::Error
+    end
+  end
+end
+
+RSpec.shared_examples 'accepts values' do |values|
+  [*values].each do |val|
+    it "accepts #{val.inspect}" do
+      type[attribute] = val
+    end
+
+    it "munges #{val.inspect} to #{val.intern.inspect}" do
+      type[attribute] = val
+      expect(type[attribute]).to eq(val.intern)
     end
   end
 end

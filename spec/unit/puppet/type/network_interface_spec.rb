@@ -11,48 +11,12 @@ describe Puppet::Type.type(:network_interface) do
   subject { described_class.attrclass(attribute) }
 
   it_behaves_like 'name is the namevar'
-
-  describe 'enable' do
-    let(:attribute) { :enable }
-
-    it 'is a property' do
-      expect(described_class.attrtype(attribute)).to eq(:property)
-    end
-
-    it 'has documentation' do
-      expect(subject.doc).to be_a_kind_of(String)
-    end
-
-    %w(true false).each do |val|
-      it "accepts #{val.inspect}" do
-        type[attribute] = val
-      end
-    end
-  end
+  it_behaves_like 'enabled type'
 
   describe 'description' do
     let(:attribute) { :description }
 
-    it 'is a property' do
-      expect(described_class.attrtype(attribute)).to eq(:property)
-    end
-
-    it 'has documentation' do
-      # Remove all whitespace to see if there's actually content
-      expect(subject.doc.gsub(/\s+/, '')).not_to be_empty
-    end
-
-    ['Engineering VLAN'].each do |desc|
-      it "accepts #{desc.inspect}" do
-        type[attribute] = desc
-      end
-    end
-
-    [0, [1], { two: :three }].each do |val|
-      it "rejects #{val.inspect}" do
-        expect { type[attribute] = val }.to raise_error Puppet::ResourceError
-      end
-    end
+    include_examples 'description property'
   end
 
   describe 'mtu (e.g. 1500 | 9000)' do
