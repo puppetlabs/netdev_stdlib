@@ -320,3 +320,24 @@ RSpec.shared_examples 'string value' do
     end
   end
 end
+
+RSpec.shared_examples 'rejects values' do |values|
+  [*values].each do |val|
+    it "rejects #{val.inspect} with a Puppet::Error" do
+      expect { type[attribute] = val }.to raise_error Puppet::Error
+    end
+  end
+end
+
+RSpec.shared_examples 'accepts values' do |values|
+  [*values].each do |val|
+    it "accepts #{val.inspect}" do
+      type[attribute] = val
+    end
+
+    it "munges #{val.inspect} to #{val.intern.inspect}" do
+      type[attribute] = val
+      expect(type[attribute]).to eq(val.intern)
+    end
+  end
+end
