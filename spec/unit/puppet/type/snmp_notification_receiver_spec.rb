@@ -41,7 +41,7 @@ describe Puppet::Type.type(:snmp_notification_receiver) do
   describe 'port' do
     let(:attribute) { :port }
     include_examples '#doc Documentation'
-    include_examples 'numeric parameter', 0, 65_536
+    include_examples 'numeric parameter', min: 0, max: 65_536
     include_examples 'rejects values', %w(foo bar baz)
   end
 

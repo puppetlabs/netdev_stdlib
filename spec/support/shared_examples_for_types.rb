@@ -201,7 +201,9 @@ RSpec.shared_examples 'array of strings value' do
   end
 end
 
-RSpec.shared_examples 'numeric parameter' do |min, max|
+RSpec.shared_examples 'numeric parameter' do |opts|
+  min = opts[:min]
+  max = opts[:max]
   [min, max].each do |val|
     it "accepts #{val.inspect}" do
       type[attribute] = val
