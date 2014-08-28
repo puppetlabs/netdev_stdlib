@@ -15,12 +15,8 @@ describe Puppet::Type.type(:network_trunk) do
 
     include_examples '#doc Documentation'
     include_examples 'rejected parameter values'
-
-    %w(dot1q isl negotiate none).each do |val|
-      it "accepts #{val.inspect}" do
-        type[attribute] = val
-      end
-    end
+    include_examples 'accepts values', %w(dot1q isl negotiate none)
+    include_examples 'rejected parameter values'
   end
 
   describe 'mode' do
@@ -28,13 +24,9 @@ describe Puppet::Type.type(:network_trunk) do
     subject { described_class.attrclass(attribute) }
 
     include_examples '#doc Documentation'
+    values = %w(access trunk dynamic_auto dynamic_desirable)
+    include_examples 'accepts values', values
     include_examples 'rejected parameter values'
-
-    %w(access trunk dynamic_auto dynamic_desirable).each do |val|
-      it "accepts #{val.inspect}" do
-        type[attribute] = val
-      end
-    end
   end
 
   describe 'untagged_vlan' do

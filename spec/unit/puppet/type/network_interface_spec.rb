@@ -22,37 +22,10 @@ describe Puppet::Type.type(:network_interface) do
   describe 'mtu (e.g. 1500 | 9000)' do
     let(:attribute) { :mtu }
 
-    it 'is a property' do
-      expect(described_class.attrtype(attribute)).to eq(:property)
-    end
-
-    it 'has documentation' do
-      # Remove all whitespace to see if there's actually content
-      expect(subject.doc.gsub(/\s+/, '')).not_to be_empty
-    end
-
-    [100, '100', ' 100', ' 100 ', '100 ', '0'].each do |val|
-      it "munges #{val.inspect} to 100" do
-        type[attribute] = val
-        expect(type[attribute]).to eq(val.to_i)
-      end
-    end
-
-    it 'munges [1] to 1' do
-      type[attribute] = [1]
-      expect(type[attribute]).to eq(1)
-    end
-
-    it 'munges [1, 2] to 1' do
-      type[attribute] = [1, 2]
-      expect(type[attribute]).to eq(1)
-    end
-
-    [{ two: :three }, 'abc'].each do |val|
-      it "rejects #{val.inspect} as invalid" do
-        expect { type[attribute] = val }.to raise_error Puppet::ResourceError
-      end
-    end
+    include_examples 'property'
+    include_examples '#doc Documentation'
+    include_examples 'numeric parameter', 1, 65_536
+    include_examples 'rejected parameter values'
   end
 
   describe 'speed (auto*|10m|100m|1g|10g|40g|56g|100g)' do

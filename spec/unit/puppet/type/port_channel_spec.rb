@@ -23,7 +23,7 @@ describe Puppet::Type.type(:port_channel) do
 
     include_examples '#doc Documentation'
     include_examples 'rejected parameter values'
-    include_examples 'numeric parameter'
+    include_examples 'numeric parameter', 0, 4095
   end
 
   describe 'description' do
@@ -38,13 +38,8 @@ describe Puppet::Type.type(:port_channel) do
 
     include_examples '#doc Documentation'
     include_examples 'rejected parameter values'
-
-    %w(active passive disabled).each do |val|
-      it "munges #{val.inspect} to #{val.intern.inspect}" do
-        type[attribute] = val
-        expect(type[attribute]).to eq(val.intern)
-      end
-    end
+    include_examples 'accepts values', %w(active passive disabled)
+    include_examples 'rejects values', %w(foo bar baz)
   end
 
   describe 'minimum_links' do
@@ -52,7 +47,7 @@ describe Puppet::Type.type(:port_channel) do
 
     include_examples '#doc Documentation'
     include_examples 'rejected parameter values'
-    include_examples 'numeric parameter'
+    include_examples 'numeric parameter', 0, 4095
   end
 
   describe 'interfaces' do

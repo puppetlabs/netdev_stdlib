@@ -14,16 +14,8 @@ describe Puppet::Type.type(:snmp_community) do
     let(:attribute) { :group }
     include_examples 'property'
     include_examples '#doc Documentation'
-
-    %w(ro rw).each do |val|
-      it "accepts #{val.inspect}" do
-        type[attribute] = val
-      end
-      it "munges #{val.inspect} to #{val.intern.inspect}" do
-        type[attribute] = val
-        expect(type[attribute]).to eq(val.intern)
-      end
-    end
+    include_examples 'accepts values', %w(ro rw)
+    include_examples 'rejects values', %w(foo bar baz)
   end
 
   describe 'acl' do

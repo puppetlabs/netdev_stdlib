@@ -12,11 +12,11 @@ RSpec.shared_examples 'parameter' do
   end
 end
 
-RSpec.shared_examples 'an ensurable type' do
+RSpec.shared_examples 'an ensurable type' do |attrs = { name: 'emanon' }|
   describe 'ensure' do
     let(:catalog) { Puppet::Resource::Catalog.new }
     let(:type) do
-      described_class.new(name: 'emanon', catalog: catalog)
+      described_class.new(name: attrs[:name], catalog: catalog)
     end
 
     let(:attribute) { :ensure }
@@ -108,7 +108,7 @@ RSpec.shared_examples '#doc Documentation' do
 end
 
 RSpec.shared_examples 'rejected parameter values' do
-  [nil, :undef, :undefined, 'foobar'].each do |val|
+  [{ two: :three }, nil, :undef, :undefined, 'foobar'].each do |val|
     it "rejects #{val.inspect} with a Puppet::Error" do
       expect { type[attribute] = val }.to raise_error Puppet::Error
     end
@@ -184,22 +184,24 @@ RSpec.shared_examples 'array of strings value' do
   end
 end
 
-RSpec.shared_examples 'numeric parameter' do
-  [1, 2, 3, 4095].each do |val|
+RSpec.shared_examples 'numeric parameter' do |min, max|
+  [min, max].each do |val|
     it "accepts #{val.inspect}" do
       type[attribute] = val
       expect(type[attribute]).to eq(val)
     end
   end
 
-  it 'munges [1, 2] to 1' do
-    type[attribute] = [1, 2]
-    expect(type[attribute]).to eq(1)
+  [min, min.to_s, " #{min}", " #{min} ", "#{min} "].each do |val|
+    it "munges #{val.inspect} to #{min}" do
+      type[attribute] = val
+      expect(type[attribute]).to eq(val.to_i)
+    end
   end
 
-  it 'munges "1" to 1' do
-    type[attribute] = '1'
-    expect(type[attribute]).to eq(1)
+  it "munges [#{min}, #{max}] to #{min}" do
+    type[attribute] = [min, max]
+    expect(type[attribute]).to eq(min)
   end
 end
 
@@ -222,9 +224,7 @@ RSpec.shared_examples 'description property' do
 end
 
 RSpec.shared_examples 'speed property' do
-  it 'is a property' do
-    expect(described_class.attrtype(attribute)).to eq(:property)
-  end
+  include_examples 'property'
 
   %w(auto 1g 10g 40g 56g 100g 100m 10m).each do |val|
     it "accepts #{val.inspect}" do
@@ -240,9 +240,7 @@ RSpec.shared_examples 'speed property' do
 end
 
 RSpec.shared_examples 'duplex property' do
-  it 'is a property' do
-    expect(described_class.attrtype(attribute)).to eq(:property)
-  end
+  include_examples 'property'
 
   %w(auto full half).each do |val|
     it "accepts #{val.inspect}" do
@@ -338,6 +336,19 @@ RSpec.shared_examples 'accepts values' do |values|
     it "munges #{val.inspect} to #{val.intern.inspect}" do
       type[attribute] = val
       expect(type[attribute]).to eq(val.intern)
+    end
+  end
+end
+
+RSpec.shared_examples 'accepts values without munging' do |values|
+  [*values].each do |val|
+    it "accepts #{val.inspect}" do
+      type[attribute] = val
+    end
+
+    it "munges #{val.inspect} to #{val.inspect} (no munging)" do
+      type[attribute] = val
+      expect(type[attribute]).to eq(val)
     end
   end
 end
