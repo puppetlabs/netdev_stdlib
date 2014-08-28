@@ -314,6 +314,23 @@ RSpec.shared_examples 'enabled type' do
   end
 end
 
+RSpec.shared_examples 'string' do |opts|
+  attribute = opts[:attribute]
+  fail unless attribute
+  name = opts[:name] || 'emanon'
+
+  describe "#{attribute}" do
+    let(:catalog) { Puppet::Resource::Catalog.new }
+    let(:attribute) { attribute }
+    let(:type) { described_class.new(name: name, catalog: catalog) }
+    subject { described_class.attrclass(attribute) }
+
+    include_examples 'string value'
+    include_examples '#doc Documentation'
+    include_examples 'rejects values', [0, [1], { two: :three }]
+  end
+end
+
 RSpec.shared_examples 'string value' do
   ['Engineering'].each do |val|
     it "accepts #{val.inspect}" do
