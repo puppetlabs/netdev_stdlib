@@ -388,3 +388,11 @@ RSpec.shared_examples 'accepts values without munging' do |values|
     end
   end
 end
+
+RSpec.shared_examples 'it has a string property' do |attribute|
+  describe "#{attribute}" do
+    let(:attribute) { attribute }
+    include_examples '#doc Documentation'
+    include_examples 'string value'
+  end
+end
