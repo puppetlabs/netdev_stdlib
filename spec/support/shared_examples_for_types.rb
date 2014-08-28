@@ -12,11 +12,11 @@ RSpec.shared_examples 'parameter' do
   end
 end
 
-RSpec.shared_examples 'an ensurable type' do |attrs = { name: 'emanon' }|
+RSpec.shared_examples 'an ensurable type' do |opts = { name: 'emanon' }|
   describe 'ensure' do
     let(:catalog) { Puppet::Resource::Catalog.new }
     let(:type) do
-      described_class.new(name: attrs[:name], catalog: catalog)
+      described_class.new(name: opts[:name], catalog: catalog)
     end
 
     let(:attribute) { :ensure }
