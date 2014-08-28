@@ -24,7 +24,7 @@ describe Puppet::Type.type(:network_interface) do
 
     include_examples 'property'
     include_examples '#doc Documentation'
-    include_examples 'numeric parameter', 1, 65_536
+    include_examples 'numeric parameter', min: 1, max: 65_536
     include_examples 'rejected parameter values'
   end
 

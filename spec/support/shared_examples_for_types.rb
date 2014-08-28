@@ -12,11 +12,11 @@ RSpec.shared_examples 'parameter' do
   end
 end
 
-RSpec.shared_examples 'an ensurable type' do |attrs = { name: 'emanon' }|
+RSpec.shared_examples 'an ensurable type' do |opts = { name: 'emanon' }|
   describe 'ensure' do
     let(:catalog) { Puppet::Resource::Catalog.new }
     let(:type) do
-      described_class.new(name: attrs[:name], catalog: catalog)
+      described_class.new(name: opts[:name], catalog: catalog)
     end
 
     let(:attribute) { :ensure }
@@ -45,6 +45,23 @@ RSpec.shared_examples 'boolean parameter' do
   end
 
   include_examples 'boolean value'
+end
+
+RSpec.shared_examples 'boolean' do |opts|
+  attribute = opts[:attribute]
+  fail unless attribute
+  name = opts[:name] || 'emanon'
+
+  describe "#{attribute}" do
+    let(:catalog) { Puppet::Resource::Catalog.new }
+    let(:attribute) { attribute }
+    let(:type) { described_class.new(name: name, catalog: catalog) }
+    subject { described_class.attrclass(attribute) }
+
+    include_examples 'boolean value'
+    include_examples '#doc Documentation'
+    include_examples 'rejects values', [0, [1], { two: :three }]
+  end
 end
 
 RSpec.shared_examples 'boolean value' do
@@ -184,7 +201,9 @@ RSpec.shared_examples 'array of strings value' do
   end
 end
 
-RSpec.shared_examples 'numeric parameter' do |min, max|
+RSpec.shared_examples 'numeric parameter' do |opts|
+  min = opts[:min]
+  max = opts[:max]
   [min, max].each do |val|
     it "accepts #{val.inspect}" do
       type[attribute] = val
@@ -297,6 +316,23 @@ RSpec.shared_examples 'enabled type' do
   end
 end
 
+RSpec.shared_examples 'string' do |opts|
+  attribute = opts[:attribute]
+  fail unless attribute
+  name = opts[:name] || 'emanon'
+
+  describe "#{attribute}" do
+    let(:catalog) { Puppet::Resource::Catalog.new }
+    let(:attribute) { attribute }
+    let(:type) { described_class.new(name: name, catalog: catalog) }
+    subject { described_class.attrclass(attribute) }
+
+    include_examples 'string value'
+    include_examples '#doc Documentation'
+    include_examples 'rejects values', [0, [1], { two: :three }]
+  end
+end
+
 RSpec.shared_examples 'string value' do
   ['Engineering'].each do |val|
     it "accepts #{val.inspect}" do
@@ -350,5 +386,13 @@ RSpec.shared_examples 'accepts values without munging' do |values|
       type[attribute] = val
       expect(type[attribute]).to eq(val)
     end
+  end
+end
+
+RSpec.shared_examples 'it has a string property' do |attribute|
+  describe "#{attribute}" do
+    let(:attribute) { attribute }
+    include_examples '#doc Documentation'
+    include_examples 'string value'
   end
 end

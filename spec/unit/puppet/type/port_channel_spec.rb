@@ -23,7 +23,7 @@ describe Puppet::Type.type(:port_channel) do
 
     include_examples '#doc Documentation'
     include_examples 'rejected parameter values'
-    include_examples 'numeric parameter', 0, 4095
+    include_examples 'numeric parameter', min: 0, max: 4095
   end
 
   describe 'description' do
@@ -47,7 +47,7 @@ describe Puppet::Type.type(:port_channel) do
 
     include_examples '#doc Documentation'
     include_examples 'rejected parameter values'
-    include_examples 'numeric parameter', 0, 4095
+    include_examples 'numeric parameter', min: 0, max: 4095
   end
 
   describe 'interfaces' do

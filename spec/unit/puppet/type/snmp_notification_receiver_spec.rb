@@ -10,6 +10,9 @@ describe Puppet::Type.type(:snmp_notification_receiver) do
 
   it_behaves_like 'an ensurable type'
   it_behaves_like 'name is the namevar'
+  it_behaves_like 'it has a string property', :vrf
+  it_behaves_like 'it has a string property', :source_interface
+  it_behaves_like 'it has a string property', :username
 
   describe 'type' do
     let(:attribute) { :type }
@@ -25,12 +28,6 @@ describe Puppet::Type.type(:snmp_notification_receiver) do
     include_examples 'rejects values', %w(foo bar baz)
   end
 
-  describe 'username' do
-    let(:attribute) { :username }
-    include_examples '#doc Documentation'
-    include_examples 'string value'
-  end
-
   describe 'security' do
     let(:attribute) { :security }
     include_examples '#doc Documentation'
@@ -41,24 +38,12 @@ describe Puppet::Type.type(:snmp_notification_receiver) do
   describe 'port' do
     let(:attribute) { :port }
     include_examples '#doc Documentation'
-    include_examples 'numeric parameter', 0, 65_536
+    include_examples 'numeric parameter', min: 0, max: 65_536
     include_examples 'rejects values', %w(foo bar baz)
   end
 
   describe 'community' do
     let(:attribute) { :community }
-    include_examples '#doc Documentation'
-    include_examples 'string value'
-  end
-
-  describe 'vrf' do
-    let(:attribute) { :vrf }
-    include_examples '#doc Documentation'
-    include_examples 'string value'
-  end
-
-  describe 'source_interface' do
-    let(:attribute) { :vrf }
     include_examples '#doc Documentation'
     include_examples 'string value'
   end
