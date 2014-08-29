@@ -186,6 +186,20 @@ RSpec.shared_examples 'interface list value' do
   end
 end
 
+RSpec.shared_examples 'array of strings property' do |opts|
+  attribute = opts[:attribute]
+  name = opts[:name] || 'emanon'
+  describe "#{attribute}" do
+    let(:catalog) { Puppet::Resource::Catalog.new }
+    let(:type) { described_class.new(name: name, catalog: catalog) }
+    let(:attribute) { attribute }
+    subject { described_class.attrclass(attribute) }
+
+    include_examples '#doc Documentation'
+    include_examples 'array of strings value'
+  end
+end
+
 RSpec.shared_examples 'array of strings value' do
   ['foo', 'bar', 'foo bar baz'].each do |val|
     it "accepts #{val.inspect}" do
