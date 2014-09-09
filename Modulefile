@@ -1,5 +1,5 @@
 name    'puppetlabs-netdev_stdlib'
-version '1.0.0'
+version '0.10.0'
 source 'https://github.com/puppetlabs/netdev_stdlib'
 author 'Puppet Labs'
 license 'Apache 2.0'
