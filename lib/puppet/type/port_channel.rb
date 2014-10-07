@@ -43,11 +43,6 @@ Puppet::Type.newtype(:port_channel) do
     newvalues(:active, :passive, :disabled)
   end
 
-  newproperty(:minimum_links) do
-    desc 'Number of active links required for LAG to be up'
-    munge { |v| Integer(v) }
-  end
-
   newproperty(:interfaces, array_matching: :all) do
     desc 'Array of Physical Interfaces'
 
@@ -59,6 +54,11 @@ Puppet::Type.newtype(:port_channel) do
     def insync?(is)
       is.sort == @should.sort.map(&:to_s)
     end
+  end
+
+  newproperty(:minimum_links) do
+    desc 'Number of active links required for LAG to be up'
+    munge { |v| Integer(v) }
   end
 
   newproperty(:speed) do
@@ -75,6 +75,7 @@ Puppet::Type.newtype(:port_channel) do
     desc 'Flow control (send) [desired|on|off]'
     newvalues(:desired, :on, :off)
   end
+
   newproperty(:flowcontrol_receive) do
     desc 'Flow control (receive) [desired|on|off]'
     newvalues(:desired, :on, :off)
