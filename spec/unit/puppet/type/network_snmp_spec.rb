@@ -9,7 +9,6 @@ describe Puppet::Type.type(:network_snmp) do
   subject { described_class.attrclass(attribute) }
 
   it_behaves_like 'name is the namevar'
-  it_behaves_like 'an ensurable type'
   it_behaves_like 'enabled type'
 
   [:contact, :location].each do |param|
