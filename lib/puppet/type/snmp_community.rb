@@ -3,6 +3,8 @@
 Puppet::Type.newtype(:snmp_community) do
   @doc = 'Manage the SNMP community'
 
+  ensurable
+
   newparam(:name, namevar: true) do
     desc 'The name of the community, e.g. "public" or "private"'
 

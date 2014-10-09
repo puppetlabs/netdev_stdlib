@@ -9,6 +9,7 @@ describe Puppet::Type.type(:snmp_community) do
   subject { described_class.attrclass(attribute) }
 
   it_behaves_like 'name is the namevar'
+  it_behaves_like 'an ensurable type'
 
   describe 'group' do
     let(:attribute) { :group }
