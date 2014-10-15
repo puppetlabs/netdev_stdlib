@@ -369,6 +369,21 @@ RSpec.shared_examples 'string value' do
   end
 end
 
+RSpec.shared_examples 'string parameter value' do
+  ['Engineering'].each do |val|
+    it "accepts #{val.inspect}" do
+      type[attribute] = val
+    end
+  end
+
+  [0, [1], { two: :three }].each do |val|
+    it "rejects #{val.inspect}" do
+      expect { type[attribute] = val }
+        .to raise_error Puppet::ResourceError, /is invalid, must be a String/
+    end
+  end
+end
+
 RSpec.shared_examples 'rejects values' do |values|
   [*values].each do |val|
     it "rejects #{val.inspect} with a Puppet::Error" do
@@ -408,5 +423,13 @@ RSpec.shared_examples 'it has a string property' do |attribute|
     let(:attribute) { attribute }
     include_examples '#doc Documentation'
     include_examples 'string value'
+  end
+end
+
+RSpec.shared_examples 'it has a string parameter' do |attribute|
+  describe "#{attribute}" do
+    let(:attribute) { attribute }
+    include_examples '#doc Documentation'
+    include_examples 'string parameter value'
   end
 end
