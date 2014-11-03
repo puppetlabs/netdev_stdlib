@@ -15,6 +15,12 @@ Puppet::Type.newtype(:snmp_user) do
     end
   end
 
+  newparam(:version, namevar: true) do
+    desc 'SNMP version [v1|v2|v3]'
+
+    newvalues(:v1, :v2, :v3)
+  end
+
   newproperty(:roles, array_matching: :all) do
     desc 'A list of roles associated with this SNMP user'
 
@@ -73,5 +79,15 @@ Puppet::Type.newtype(:snmp_user) do
       else fail "value #{value.inspect} is invalid, must be a String."
       end
     end
+  end
+
+  def self.title_patterns
+    identity = nil # optimization in Puppet core
+    name = [ :name, identity ]
+    version  = [ :version, lambda { |x| x.intern } ]
+    [
+      [ /^([^:]*)$/,                 [ name ] ],
+      [ /^([^:]*):([^:]*)$/,         [ name, version ] ],
+    ]
   end
 end
