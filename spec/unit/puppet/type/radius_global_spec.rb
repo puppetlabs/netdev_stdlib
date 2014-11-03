@@ -8,6 +8,7 @@ describe Puppet::Type.type(:radius_global) do
   subject { described_class.attrclass(attribute) }
 
   it_behaves_like 'name is the namevar'
+  it_behaves_like 'enabled type'
   it_behaves_like 'it has a string property', :key
 
   describe 'key_format' do

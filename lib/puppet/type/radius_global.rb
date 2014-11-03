@@ -13,6 +13,11 @@ Puppet::Type.newtype(:radius_global) do
     end
   end
 
+  newproperty(:enable) do
+    desc 'Enable or disable radius functionality [true|false]'
+    newvalues(:true, :false)
+  end
+
   newproperty(:key) do
     desc 'Encryption key (plaintext or in hash form depending on key_format)'
 
