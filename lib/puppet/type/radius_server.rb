@@ -84,7 +84,7 @@ Puppet::Type.newtype(:radius_server) do
   end
 
   newproperty(:auth_port) do
-    desc 'Port number to use for accounting'
+    desc 'Port number to use for authentication'
     munge { |v| Integer(v) }
   end
 
