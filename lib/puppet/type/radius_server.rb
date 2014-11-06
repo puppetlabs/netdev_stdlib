@@ -4,13 +4,33 @@ Puppet::Type.newtype(:radius_server) do
   @doc = 'Configure a radius server'
 
   newparam(:name, namevar: true) do
-    desc 'The name of the radius server group'
+    desc 'The name of the radius server'
 
     validate do |value|
       if value.is_a? String then super(value)
       else fail "value #{value.inspect} is invalid, must be a String."
       end
     end
+  end
+
+  newproperty(:hostname) do
+    desc 'The hostname or address of the radius server'
+
+    validate do |value|
+      if value.is_a? String then super(value)
+      else fail "value #{value.inspect} is invalid, must be a String."
+      end
+    end
+  end
+
+  newproperty(:auth_port) do
+    desc 'Port number to use for authentication'
+    munge { |v| Integer(v) }
+  end
+
+  newproperty(:acct_port) do
+    desc 'Port number to use for accounting'
+    munge { |v| Integer(v) }
   end
 
   newproperty(:key) do
@@ -73,19 +93,9 @@ Puppet::Type.newtype(:radius_server) do
     munge { |v| Integer(v) }
   end
 
-  newproperty(:acct_port) do
-    desc 'Port number to use for accounting'
-    munge { |v| Integer(v) }
-  end
-
   newproperty(:accounting_only) do
     desc 'Enable this server for accounting only'
     newvalues(:true, :false)
-  end
-
-  newproperty(:auth_port) do
-    desc 'Port number to use for authentication'
-    munge { |v| Integer(v) }
   end
 
   newproperty(:authentication_only) do
