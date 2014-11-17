@@ -29,6 +29,14 @@ Puppet::Type.newtype(:snmp_user) do
       else fail "value #{value.inspect} is invalid, must be a String."
       end
     end
+
+    def should_to_s(new_value=@should)
+      self.class.format_value_for_display(new_value)
+    end
+
+    def is_to_s(current_value=@is)
+      self.class.format_value_for_display(current_value)
+    end
   end
 
   newproperty(:auth) do
