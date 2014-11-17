@@ -3,6 +3,8 @@
 Puppet::Type.newtype(:tacacs_server) do
   @doc = 'Configure a tacacs server'
 
+  ensurable
+
   newparam(:name, namevar: true) do
     desc 'The name of the tacacs server group'
 
@@ -11,6 +13,37 @@ Puppet::Type.newtype(:tacacs_server) do
       else fail "value #{value.inspect} is invalid, must be a String."
       end
     end
+  end
+
+  newproperty(:hostname) do
+    desc 'The hostname or address of the tacacs server'
+
+    validate do |value|
+      if value.is_a? String then super(value)
+      else fail "value #{value.inspect} is invalid, must be a String."
+      end
+    end
+  end
+
+  newproperty(:single_connection) do
+    desc 'Enable or disable session multiplexing [true|false]'
+    newvalues(:true, :false)
+  end
+
+  newproperty(:vrf) do
+    desc 'specifies the VRF instance used to communicate with the server'
+
+    validate do |value|
+      if value.is_a? String then super(value)
+      else fail "value #{value.inspect} is invalid, must be a String."
+      end
+    end
+  end
+
+  newproperty(:port) do
+    desc 'The port of the tacacs server'
+
+    munge { |v| Integer(v) }
   end
 
   newproperty(:key) do
@@ -31,11 +64,6 @@ Puppet::Type.newtype(:tacacs_server) do
   newproperty(:timeout) do
     desc 'Number of seconds before the timeout period ends'
     munge { |v| Integer(v) }
-  end
-
-  newproperty(:single_connection) do
-    desc 'Enable or disable session multiplexing [true|false]'
-    newvalues(:true, :false)
   end
 
   newproperty(:group) do

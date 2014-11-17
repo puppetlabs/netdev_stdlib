@@ -9,10 +9,17 @@ describe Puppet::Type.type(:tacacs_server) do
 
   it_behaves_like 'name is the namevar'
   it_behaves_like 'it has a string property', :key
+  it_behaves_like 'it has a string property', :hostname
+  it_behaves_like 'an ensurable type'
 
   describe 'key_format' do
     let(:attribute) { :key_format }
     include_examples 'numeric parameter', min: 0, max: 7
+  end
+
+  describe 'port' do
+    let(:attribute) { :port }
+    include_examples 'numeric parameter', min: 0, max: 65_535
   end
 
   describe 'timeout' do
