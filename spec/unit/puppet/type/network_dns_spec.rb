@@ -8,14 +8,8 @@ describe Puppet::Type.type(:network_dns) do
 
   subject { described_class.attrclass(attribute) }
 
-  it_behaves_like 'name is the namevar'
+  it_behaves_like 'the namevar is', :name
   it_behaves_like 'it has a string property', :domain
-
-  [:search, :servers].each do |param|
-    describe param.to_s do
-      let(:attribute) { param }
-      include_examples 'array of strings value'
-    end
-  end
-
+  it_behaves_like 'it has an array property', :servers
+  it_behaves_like 'it has an array property', :search
 end

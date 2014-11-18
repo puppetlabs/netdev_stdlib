@@ -6,7 +6,7 @@ Puppet::Type.newtype(:network_dns) do
   ensurable
 
   newparam(:name, namevar: true) do
-    desc 'Resource name, not used to configure the device'
+    desc 'Name, generally "settings", not used to manage the resource'
 
     validate do |value|
       if value.is_a? String then super(value)
@@ -28,25 +28,44 @@ Puppet::Type.newtype(:network_dns) do
   newproperty(:search, array_matching: :all) do
     desc 'Array of DNS suffixes to search for FQDN entries'
 
-    validate do |val|
-      fail "value #{val.inspect} must be a string" unless val.is_a? String
+    validate do |value|
+      if value.is_a? String then super(value)
+      else fail "value #{value.inspect} is invalid, must be a String."
+      end
     end
 
     def insync?(is)
       is.sort == @should.sort.map(&:to_s)
+    end
+
+    def should_to_s(new_value=@should)
+      self.class.format_value_for_display(new_value)
+    end
+
+    def is_to_s(current_value=@is)
+      self.class.format_value_for_display(current_value)
     end
   end
 
   newproperty(:servers, array_matching: :all) do
     desc 'Array of DNS servers to use for name resolution'
 
-    validate do |val|
-      fail "value #{val.inspect} must be a string" unless val.is_a? String
+    validate do |value|
+      if value.is_a? String then super(value)
+      else fail "value #{value.inspect} is invalid, must be a String."
+      end
     end
 
     def insync?(is)
       is.sort == @should.sort.map(&:to_s)
     end
-  end
 
+    def should_to_s(new_value=@should)
+      self.class.format_value_for_display(new_value)
+    end
+
+    def is_to_s(current_value=@is)
+      self.class.format_value_for_display(current_value)
+    end
+  end
 end

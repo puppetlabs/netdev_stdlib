@@ -114,6 +114,41 @@ RSpec.shared_examples 'name is the namevar' do
   end
 end
 
+RSpec.shared_examples 'the namevar is' do |namevar|
+  describe "namevar of #{namevar}" do
+    let(:catalog) { Puppet::Resource::Catalog.new }
+    let(:type) do
+      described_class.new(title: 'emanon', catalog: catalog)
+    end
+
+    let(:attribute) { namevar.intern }
+    subject { described_class.attrclass(attribute) }
+
+    include_examples '#doc Documentation'
+
+    it 'is a parameter' do
+      expect(described_class.attrtype(attribute)).to eq(:param)
+    end
+
+    ['engineering'].each do |val|
+      it "accepts #{val.inspect}" do
+        type[attribute] = val
+      end
+    end
+
+    it "sets #{namevar} based on the title" do
+      expect(type[attribute]).to eq 'emanon'
+    end
+
+    [0, %w(Marketing Sales), { two: :three }].each do |val|
+      it "rejects #{val.inspect}" do
+        expect { type[attribute] = val }
+          .to raise_error Puppet::ResourceError, /is invalid, must be a String/
+      end
+    end
+  end
+end
+
 RSpec.shared_examples '#doc Documentation' do
   it '#doc is a String' do
     expect(subject.doc).to be_a_kind_of(String)
@@ -431,5 +466,32 @@ RSpec.shared_examples 'it has a string parameter' do |attribute|
     let(:attribute) { attribute }
     include_examples '#doc Documentation'
     include_examples 'string parameter value'
+  end
+end
+
+RSpec.shared_examples 'it has an array property' do |attribute|
+  describe "#{attribute}" do
+    let(:attribute) { attribute }
+    include_examples '#doc Documentation'
+
+    ['foo'].each do |val|
+      it "accepts #{val.inspect}" do
+        type[attribute] = val
+      end
+    end
+
+    [0, { two: :three }].each do |val|
+      it "rejects #{val.inspect}" do
+        expect { type[attribute] = val }
+          .to raise_error Puppet::ResourceError, /is invalid, must be a String/
+      end
+    end
+
+    [%w(one two three), %w(one), []].each do |val|
+      it "accepts #{val.inspect} without munging" do
+        type[attribute] = val
+        expect(type[attribute]).to eq(val)
+      end
+    end
   end
 end
