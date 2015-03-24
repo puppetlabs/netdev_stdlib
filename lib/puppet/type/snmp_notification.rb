@@ -3,6 +3,8 @@
 Puppet::Type.newtype(:snmp_notification) do
   @doc = 'Enable or disable notification groups and events'
 
+  apply_to_all
+
   newparam(:name, namevar: true) do
     desc 'The notification name or "all" for all notifications'
 

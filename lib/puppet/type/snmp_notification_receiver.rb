@@ -3,6 +3,7 @@
 Puppet::Type.newtype(:snmp_notification_receiver) do
   @doc = 'Manage an SNMP notification receiver'
 
+  apply_to_all
   ensurable
 
   newparam(:name, namevar: true) do

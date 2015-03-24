@@ -3,6 +3,7 @@
 Puppet::Type.newtype(:snmp_community) do
   @doc = 'Manage the SNMP community'
 
+  apply_to_all
   ensurable
 
   newparam(:name, namevar: true) do

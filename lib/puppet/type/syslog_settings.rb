@@ -3,6 +3,8 @@
 Puppet::Type.newtype(:syslog_settings) do
   @doc = 'Configure global syslog settings'
 
+  apply_to_all
+
   newparam(:name, namevar: true) do
     desc 'The hostname or address of the NTP server'
 

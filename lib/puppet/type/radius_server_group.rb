@@ -3,6 +3,7 @@
 Puppet::Type.newtype(:radius_server_group) do
   @doc = 'Configure a radius server group'
 
+  apply_to_all
   ensurable
 
   newparam(:name, namevar: true) do

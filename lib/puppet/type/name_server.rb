@@ -3,6 +3,7 @@
 Puppet::Type.newtype(:name_server) do
   @doc = 'Configure the resolver to use the specified DNS server'
 
+  apply_to_all
   ensurable
 
   newparam(:name, namevar: true) do

@@ -3,6 +3,7 @@
 Puppet::Type.newtype(:tacacs_server) do
   @doc = 'Configure a tacacs server'
 
+  apply_to_all
   ensurable
 
   newparam(:name, namevar: true) do

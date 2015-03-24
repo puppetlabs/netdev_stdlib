@@ -3,6 +3,7 @@
 Puppet::Type.newtype(:network_vlan) do
   @doc = "Manage VLAN's.  Layer-2 VLAN's are managed by this resource type."
 
+  apply_to_all
   ensurable
 
   feature :describable, 'The ability to add a description to a VLAN.'

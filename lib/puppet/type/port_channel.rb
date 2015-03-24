@@ -3,6 +3,7 @@
 Puppet::Type.newtype(:port_channel) do
   @doc = 'Network Device Link Aggregation Group'
 
+  apply_to_all
   ensurable
 
   newparam(:name, namevar: true) do

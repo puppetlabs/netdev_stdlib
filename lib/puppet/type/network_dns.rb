@@ -3,6 +3,7 @@
 Puppet::Type.newtype(:network_dns) do
   @doc = 'Configure DNS settings for network devices'
 
+  apply_to_all
   ensurable
 
   newparam(:name, namevar: true) do

@@ -4,6 +4,7 @@
 Puppet::Type.newtype(:network_trunk) do
   @doc = 'Ethernet logical (switch-port) interface.  Configures VLAN trunking.'
 
+  apply_to_all
   ensurable
 
   newparam(:name, namevar: true) do

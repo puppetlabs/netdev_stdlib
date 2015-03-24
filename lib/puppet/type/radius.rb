@@ -3,6 +3,8 @@
 Puppet::Type.newtype(:radius) do
   @doc = 'Enable or disable radius functionality'
 
+  apply_to_all
+
   newparam(:name, namevar: true) do
     desc 'Resource name, not used to manage the device'
 

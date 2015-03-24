@@ -3,6 +3,7 @@
 Puppet::Type.newtype(:syslog_server) do
   @doc = 'Configure a remote syslog server for logging'
 
+  apply_to_all
   ensurable
 
   newparam(:name, namevar: true) do

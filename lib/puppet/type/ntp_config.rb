@@ -3,6 +3,8 @@
 Puppet::Type.newtype(:ntp_config) do
   @doc = 'Global configuration for the NTP system'
 
+  apply_to_all
+
   newparam(:name, namevar: true) do
     desc 'Resource name, not used to configure the device'
 

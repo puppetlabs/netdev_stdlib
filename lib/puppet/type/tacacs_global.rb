@@ -3,6 +3,8 @@
 Puppet::Type.newtype(:tacacs_global) do
   @doc = 'Configure global tacacs settings'
 
+  apply_to_all
+
   newparam(:name, namevar: true) do
     desc 'Resource identifier, not used to manage the device'
 

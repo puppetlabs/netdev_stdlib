@@ -3,6 +3,7 @@
 Puppet::Type.newtype(:domain_name) do
   @doc = 'Configure the domain name of the device'
 
+  apply_to_all
   ensurable
 
   newparam(:name, namevar: true) do

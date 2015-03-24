@@ -3,6 +3,8 @@
 Puppet::Type.newtype(:network_interface) do
   @doc = 'Manage physical network interfaces, e.g. Ethernet1'
 
+  apply_to_all
+
   newproperty(:enable) do
     desc 'Enable the interface, true or false'
     newvalues(:true, :false)

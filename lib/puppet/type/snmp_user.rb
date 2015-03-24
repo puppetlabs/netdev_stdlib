@@ -3,6 +3,7 @@
 Puppet::Type.newtype(:snmp_user) do
   @doc = 'Set the SNMP contact name'
 
+  apply_to_all
   ensurable
 
   newparam(:name, namevar: true) do

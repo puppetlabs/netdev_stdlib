@@ -3,6 +3,8 @@
 Puppet::Type.newtype(:radius_global) do
   @doc = 'Configure global radius settings'
 
+  apply_to_all
+
   newparam(:name, namevar: true) do
     desc 'Resource identifier, not used to manage the device'
 

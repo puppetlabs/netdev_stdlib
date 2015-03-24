@@ -3,6 +3,7 @@
 Puppet::Type.newtype(:search_domain) do
   @doc = 'Configure the resolver to use the specified search domain'
 
+  apply_to_all
   ensurable
 
   newparam(:name, namevar: true) do

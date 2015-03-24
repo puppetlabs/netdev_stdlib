@@ -3,6 +3,8 @@
 Puppet::Type.newtype(:ntp_server) do
   @doc = 'Specify an NTP server'
 
+  apply_to_all
+
   newparam(:name, namevar: true) do
     desc 'The hostname or address of the NTP server'
 

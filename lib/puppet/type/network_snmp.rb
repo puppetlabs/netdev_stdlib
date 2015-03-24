@@ -3,6 +3,8 @@
 Puppet::Type.newtype(:network_snmp) do
   @doc = 'Manage snmp location, contact and enable SNMP on the device'
 
+  apply_to_all
+
   newparam(:name, namevar: true) do
     desc 'The name of the Puppet resource, not used to manage the device'
 
