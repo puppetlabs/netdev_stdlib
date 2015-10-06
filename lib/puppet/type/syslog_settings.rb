@@ -6,7 +6,7 @@ Puppet::Type.newtype(:syslog_settings) do
   apply_to_all
 
   newparam(:name, namevar: true) do
-    desc 'The hostname or address of the NTP server'
+    desc 'Resource name, not used to configure the device'
 
     validate do |value|
       if value.is_a? String then super(value)
