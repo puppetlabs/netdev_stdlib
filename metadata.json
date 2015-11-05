@@ -1,0 +1,20 @@
+{
+  "name": "puppetlabs-netdev_stdlib",
+  "version": "0.11.0",
+  "author": "puppetlabs",
+  "summary": "Type definitions for Networking Device (NetDev) Standard Library",
+  "license": "Apache-2.0",
+  "source": "git://github.com/puppetlabs/netdev_stdlib.git",
+  "project_page": "https://github.com/puppetlabs/netdev_stdlib",
+  "issues_url": "https://tickets.puppetlabs.com/browse/NETDEV",
+  "dependencies": [
+  
+  ],
+  "operatingsystem_support": [
+  
+  ],
+  "requirements": [
+  
+  ],
+  "description": "Type definitions for Networking Device (NetDev) Standard Library"
+}
