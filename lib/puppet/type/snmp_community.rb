@@ -17,8 +17,12 @@ Puppet::Type.newtype(:snmp_community) do
   end
 
   newproperty(:group) do
-    desc 'The SNMP group for this community [rw|ro]'
-    newvalues(:rw, :ro)
+    desc 'The SNMP group for this community'
+    validate do |value|
+      if value.is_a? String then super(value)
+      else fail "value #{value.inspect} is invalid, must be a String."
+      end
+    end
   end
 
   newproperty(:acl) do

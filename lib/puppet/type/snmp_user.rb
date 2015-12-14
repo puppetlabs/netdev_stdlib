@@ -16,7 +16,7 @@ Puppet::Type.newtype(:snmp_user) do
     end
   end
 
-  newparam(:version, namevar: true) do
+  newparam(:version) do
     desc 'SNMP version [v1|v2|v3]'
 
     newvalues(:v1, :v2, :v3)
