@@ -16,12 +16,12 @@ Puppet::Type.newtype(:snmp_notification_receiver) do
     end
   end
 
-  newparam(:port, namevar: true) do
+  newproperty(:port) do
     desc 'SNMP UDP port number'
     munge { |v| Integer([*v].first) }
   end
 
-  newparam(:username, namevar: true) do
+  newproperty(:username) do
     desc 'Username to use for SNMPv3 privacy and authentication.  This is the'\
       'community string for SNMPv1 and v2'
 

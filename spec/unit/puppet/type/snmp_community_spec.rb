@@ -15,8 +15,7 @@ describe Puppet::Type.type(:snmp_community) do
     let(:attribute) { :group }
     include_examples 'property'
     include_examples '#doc Documentation'
-    include_examples 'accepts values', %w(ro rw)
-    include_examples 'rejects values', %w(foo bar baz)
+    include_examples 'string value'
   end
 
   describe 'acl' do
