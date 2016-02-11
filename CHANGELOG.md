@@ -1,6 +1,15 @@
 # Change log
 All notable changes to this project will be documented in this file.
 
+## 0.11.1 - 2016-02-11
+### Summary:
+This release changes `snmp_notification_receiver` type's `port` and `username` parameters to properties so they may be managed directly.
+
+### Fixed:
+- `snmp_notification_receiver` port parameter changed to property
+- `snmp_notification_receiver` username parameter changed to property
+- `snmp_user` version parameter now specified as not a namevar
+
 ## 0.11.0 - 2015-11-05
 ### Summary:
 This backwards-incompatible release adds several useful types and type properties, makes several types not have conflicting namevars, removes several unuseful types, and fixes some discrepancies.
