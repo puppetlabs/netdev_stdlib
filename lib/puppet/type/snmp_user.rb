@@ -16,10 +16,10 @@ Puppet::Type.newtype(:snmp_user) do
     end
   end
 
-  newparam(:version) do
-    desc 'SNMP version [v1|v2|v3]'
+  newproperty(:version) do
+    desc 'SNMP version [v1|v2|v2c|v3]'
 
-    newvalues(:v1, :v2, :v3)
+    newvalues(:v1, :v2, :v2c, :v3)
   end
 
   newproperty(:roles, array_matching: :all) do
