@@ -149,6 +149,41 @@ RSpec.shared_examples 'the namevar is' do |namevar|
   end
 end
 
+RSpec.shared_examples 'numeric namevar' do |opts|
+  describe 'name' do
+    name = opts[:name] || 5
+    let(:catalog) { Puppet::Resource::Catalog.new }
+    let(:type) do
+      described_class.new(name: name, catalog: catalog)
+    end
+
+    let(:attribute) { :name }
+    subject { described_class.attrclass(attribute) }
+
+    include_examples '#doc Documentation'
+
+    it 'is a parameter' do
+      expect(described_class.attrtype(attribute)).to eq(:param)
+    end
+
+    min = opts[:min]
+    max = opts[:max]
+    [min, max].each do |val|
+      it "accepts #{val.inspect}" do
+        type[attribute] = val
+        expect(type[attribute]).to eq(val.to_s)
+      end
+    end
+
+    [min, min.to_s, " #{min}", " #{min} ", "#{min} "].each do |val|
+      it "munges #{val.inspect} to #{min}" do
+        type[attribute] = val
+        expect(type[attribute]).to eq(val.to_s.strip)
+      end
+    end
+  end
+end
+
 RSpec.shared_examples '#doc Documentation' do
   it '#doc is a String' do
     expect(subject.doc).to be_a_kind_of(String)
@@ -250,6 +285,35 @@ RSpec.shared_examples 'array of strings value' do
   end
 end
 
+RSpec.shared_examples 'array of strings or integers property' do |opts|
+  attribute = opts[:attribute]
+  name = opts[:name] || 'emanon'
+  describe "#{attribute}" do
+    let(:catalog) { Puppet::Resource::Catalog.new }
+    let(:type) { described_class.new(name: name, catalog: catalog) }
+    let(:attribute) { attribute }
+    subject { described_class.attrclass(attribute) }
+
+    include_examples '#doc Documentation'
+    include_examples 'array of strings or integers value'
+  end
+end
+
+RSpec.shared_examples 'array of strings or integers value' do
+  ['foo', 'bar', 'foo bar baz', 9, 500].each do |val|
+    it "accepts #{val.inspect}" do
+      type[attribute] = val
+      expect(type[attribute]).to eq([val])
+    end
+  end
+
+  [{ foo: 1 }, true, false, nil].each do |val|
+    it "rejects #{val.inspect} with a Puppet::Error" do
+      expect { type[attribute] = val }.to raise_error Puppet::Error
+    end
+  end
+end
+
 RSpec.shared_examples 'numeric parameter' do |opts|
   min = opts[:min]
   max = opts[:max]
@@ -286,6 +350,22 @@ RSpec.shared_examples 'description property' do
 
   [0, [1], { two: :three }].each do |val|
     it "rejects #{val.inspect}" do
+      expect { type[attribute] = val }.to raise_error Puppet::ResourceError
+    end
+  end
+end
+
+RSpec.shared_examples 'algorithm property' do
+  include_examples 'property'
+
+  %w(md5 sha1 sha256).each do |val|
+    it "accepts #{val.inspect}" do
+      type[attribute] = val
+    end
+  end
+
+  [0, 15, '0', '15', { two: :three }, 'abc'].each do |val|
+    it "rejects #{val.inspect} with Puppet::ResourceError" do
       expect { type[attribute] = val }.to raise_error Puppet::ResourceError
     end
   end
