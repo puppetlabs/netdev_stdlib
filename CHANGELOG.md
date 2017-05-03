@@ -1,6 +1,25 @@
 # Change log
 All notable changes to this project will be documented in this file.
 
+## 0.12.0 - 2017-05-03
+### Summary:
+This release enhances NTP types
+
+### Added:
+- `ntp_auth_key` type
+  - algorithm
+  - mode
+  - password
+- `ntp_config` type
+  - authenticate
+  - trusted_key
+- `ntp_server` type
+  - key
+  - maxpoll
+  - minpoll
+  - source_interface
+  - vrf
+
 ## 0.11.1 - 2016-02-11
 ### Summary:
 This release changes `snmp_notification_receiver` type's `port` and `username` parameters to properties so they may be managed directly.

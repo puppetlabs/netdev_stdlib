@@ -303,7 +303,7 @@ For more information on rspec, please see https://github.com/rspec/rspec
 
 # License
 
-Copyright 2014 [Puppet Labs][puppetlabs]
+Copyright 2014-2017 [Puppet, Inc.][puppet]
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
 this file except in compliance with the License.  You may obtain a copy of the
@@ -319,7 +319,7 @@ specific language governing permissions and limitations under the License.
 [book]: http://shop.oreilly.com/product/0636920026860.do
 [license]: http://www.apache.org/licenses/LICENSE-2.0
 [travis]: https://travis-ci.org/puppetlabs/netdev_stdlib/builds
-[puppetlabs]: http://puppetlabs.com
+[puppet]: https://puppet.com
 [types doc]: https://docs.puppetlabs.com/guides/custom_types.html
 [gary provider]: http://garylarizza.com/blog/2013/12/15/seriously-what-is-this-provider-doing/
 [crossfader]: http://github.com/puppetlabs/crossfader
