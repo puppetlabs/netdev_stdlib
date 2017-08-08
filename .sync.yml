@@ -1,0 +1,17 @@
+---
+appveyor.yml:
+  delete: true
+
+Gemfile:
+  optional:
+    ':development':
+      - gem: 'rspec-puppet'
+
+MAINTAINERS.md:
+  delete: true
+
+NOTICE:
+  copyright_holders:
+    - name: 'Puppet, Inc.'
+      begin: 2014
+      end: 'latest'
