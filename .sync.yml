@@ -1,4 +1,7 @@
 ---
+.travis.yml:
+  docker_sets:
+
 appveyor.yml:
   delete: true
 
@@ -15,3 +18,16 @@ NOTICE:
     - name: 'Puppet, Inc.'
       begin: 2014
       end: 'latest'
+
+spec/acceptance/nodesets/centos-7-x64.yml:
+  delete: true
+spec/acceptance/nodesets/debian-8-x64.yml:
+  delete: true
+spec/acceptance/nodesets/default.yml:
+  delete: true
+spec/acceptance/nodesets/docker/centos-7.yml:
+  delete: true
+spec/acceptance/nodesets/docker/debian-8.yml:
+  delete: true
+spec/acceptance/nodesets/docker/ubuntu-14.04.yml:
+  delete: true
