@@ -40,8 +40,8 @@ Puppet::Type.newtype(:tacacs_global) do
     munge { |v| Integer(v) }
   end
 
-  newproperty(:source_interface) do
-    desc 'The source interface used for TACACS packets'
+  newproperty(:source_interface, array_matching: :all) do
+    desc 'The source interface used for TACACS packets (array of strings for multiple).'
 
     validate do |value|
       if value.is_a? String then super(value)
@@ -55,8 +55,8 @@ Puppet::Type.newtype(:tacacs_global) do
     munge { |v| Integer(v) }
   end
 
-  newproperty(:vrf) do
-    desc 'The VRF associated with source_interface.'
+  newproperty(:vrf, array_matching: :all) do
+    desc 'The VRF associated with source_interface (array of strings for multiple).'
 
     validate do |value|
       if value.is_a? String then super(value)

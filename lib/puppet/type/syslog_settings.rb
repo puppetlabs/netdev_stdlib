@@ -40,8 +40,8 @@ Puppet::Type.newtype(:syslog_settings) do
     end
   end
 
-  newproperty(:source_interface) do
-    desc 'Source interface to send syslog data from, e.g. "ethernet 2/1"'
+  newproperty(:source_interface, array_matching: :all) do
+    desc 'Source interface to send syslog data from, e.g. "ethernet 2/1" (array of strings for multiple)'
 
     validate do |value|
       if value.is_a? String then super(value)
@@ -55,8 +55,8 @@ Puppet::Type.newtype(:syslog_settings) do
     newvalues(:seconds, :milliseconds)
   end
 
-  newproperty(:vrf) do
-    desc 'The VRF associated with source_interface.'
+  newproperty(:vrf, array_matching: :all) do
+    desc 'The VRF associated with source_interface (array of strings for multiple).'
 
     validate do |value|
       if value.is_a? String then super(value)

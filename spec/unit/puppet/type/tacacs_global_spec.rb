@@ -9,8 +9,8 @@ describe Puppet::Type.type(:tacacs_global) do
 
   it_behaves_like 'name is the namevar'
   it_behaves_like 'it has a string property', :key
-  it_behaves_like 'it has a string property', :source_interface
-  it_behaves_like 'it has a string property', :vrf
+  it_behaves_like 'array of strings property', attribute: :source_interface
+  it_behaves_like 'array of strings property', attribute: :vrf
 
   describe 'key_format' do
     let(:attribute) { :key_format }
