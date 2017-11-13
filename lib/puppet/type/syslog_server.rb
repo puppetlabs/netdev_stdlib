@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require_relative '../../puppet_x/puppetlabs/netdev_stdlib/property/port_range'
+
 Puppet::Type.newtype(:syslog_server) do
   @doc = 'Configure a remote syslog server for logging'
 
@@ -7,13 +9,19 @@ Puppet::Type.newtype(:syslog_server) do
   ensurable
 
   newparam(:name, namevar: true) do
-    desc 'The hostname or address of the NTP server'
+    desc 'The hostname or address of the remote syslog server'
 
     validate do |value|
       if value.is_a? String then super(value)
       else fail "value #{value.inspect} is invalid, must be a String."
       end
     end
+  end
+
+  newproperty(:port, parent: PuppetX::PuppetLabs::NetdevStdlib::Property::PortRange) do
+    desc 'Port number of remote syslog server'
+
+    munge { |v| Integer(v) }
   end
 
   newproperty(:severity_level) do

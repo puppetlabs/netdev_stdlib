@@ -9,6 +9,22 @@ describe Puppet::Type.type(:syslog_settings) do
 
   it_behaves_like 'name is the namevar'
   it_behaves_like 'enabled type'
+  it_behaves_like 'array of strings property', attribute: :source_interface
+  it_behaves_like 'array of strings property', attribute: :vrf
+
+  describe 'console' do
+    let(:attribute) { :console }
+    include_examples '#doc Documentation'
+    include_examples 'accepts values without munging', %w(0 unset)
+    include_examples 'rejects values', %w(foo -1 9)
+  end
+
+  describe 'monitor' do
+    let(:attribute) { :monitor }
+    include_examples '#doc Documentation'
+    include_examples 'accepts values without munging', %w(0 unset)
+    include_examples 'rejects values', %w(foo -1 9)
+  end
 
   describe 'time_stamp_units' do
     let(:attribute) { :time_stamp_units }
