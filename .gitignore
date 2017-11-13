@@ -25,3 +25,4 @@ puppet-acceptance/
 /tmp/
 /coverage/
 .DS_Store
+vendor/

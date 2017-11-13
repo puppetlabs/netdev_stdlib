@@ -1,6 +1,28 @@
 # Change log
 All notable changes to this project will be documented in this file.
 
+## 0.13.0 - 2017-11-13
+### Summary:
+This release enhances syslog, RADIUS, TACACS, and SNMP types
+
+### Added:
+- `syslog_server`
+  - port
+- `syslog_settings`
+  - console
+  - monitor
+  - source_interface
+  - vrf
+- `radius_global`
+  - source_interface
+  - vrf
+- `tacacs_global`
+  - source_interface
+  - vrf
+
+### Fixed:
+- `snmp_user` version parameter changed to property
+
 ## 0.12.0 - 2017-05-03
 ### Summary:
 This release enhances NTP types
