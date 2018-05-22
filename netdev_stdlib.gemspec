@@ -1,4 +1,5 @@
 # coding: utf-8
+
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'netdev_stdlib/version'
@@ -8,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.version       = NetdevStdlib::VERSION
   spec.authors       = ['Jeff McCune']
   spec.email         = ['jeff@puppetlabs.com']
-  spec.description   = %q{NetDev Standard Library provides Puppet types to configure network devices}
-  spec.summary       = %q{Type definitions for Networking Device (NetDev) Standard Library}
+  spec.description   = 'NetDev Standard Library provides Puppet types to configure network devices'
+  spec.summary       = 'Type definitions for Networking Device (NetDev) Standard Library'
   spec.homepage      = 'https://github.com/puppetlabs/netdev_stdlib'
   spec.license       = 'Apache 2.0'
 

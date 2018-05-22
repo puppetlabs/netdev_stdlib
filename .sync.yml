@@ -9,6 +9,9 @@ Gemfile:
   optional:
     ':development':
       - gem: 'rspec-puppet'
+    ':development':
+      - gem: 'puppet-resource_api'
+
 
 MAINTAINERS.md:
   delete: true

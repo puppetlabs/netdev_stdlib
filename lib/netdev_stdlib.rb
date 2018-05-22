@@ -1,4 +1,4 @@
-require "netdev_stdlib/version"
+require 'netdev_stdlib/version'
 
 module NetdevStdlib
 end

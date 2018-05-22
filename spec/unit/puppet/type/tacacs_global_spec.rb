@@ -1,29 +1,40 @@
 # encoding: utf-8
 
 require 'spec_helper'
+describe 'tacacs_global' do
+  describe 'old style' do
+    fake_operatingsystem
+    describe Puppet::Type.type(:tacacs_global) do
+      let(:catalog) { Puppet::Resource::Catalog.new }
+      let(:type) { described_class.new(name: 'emanon', catalog: catalog) }
+      subject { described_class.attrclass(attribute) }
 
-describe Puppet::Type.type(:tacacs_global) do
-  let(:catalog) { Puppet::Resource::Catalog.new }
-  let(:type) { described_class.new(name: 'emanon', catalog: catalog) }
-  subject { described_class.attrclass(attribute) }
+      it_behaves_like 'name is the namevar'
+      it_behaves_like 'it has a string property', :key
+      it_behaves_like 'array of strings property', attribute: :source_interface
+      it_behaves_like 'array of strings property', attribute: :vrf
 
-  it_behaves_like 'name is the namevar'
-  it_behaves_like 'it has a string property', :key
-  it_behaves_like 'array of strings property', attribute: :source_interface
-  it_behaves_like 'array of strings property', attribute: :vrf
+      describe 'key_format' do
+        let(:attribute) { :key_format }
+        include_examples 'numeric parameter', min: 0, max: 7
+      end
 
-  describe 'key_format' do
-    let(:attribute) { :key_format }
-    include_examples 'numeric parameter', min: 0, max: 7
+      describe 'timeout' do
+        let(:attribute) { :timeout }
+        include_examples 'numeric parameter', min: 0, max: 604_800
+      end
+
+      describe 'retransmit_count' do
+        let(:attribute) { :retransmit_count }
+        include_examples 'numeric parameter', min: 0, max: 2048
+      end
+    end
   end
-
-  describe 'timeout' do
-    let(:attribute) { :timeout }
-    include_examples 'numeric parameter', min: 0, max: 604_800
-  end
-
-  describe 'retransmit_count' do
-    let(:attribute) { :retransmit_count }
-    include_examples 'numeric parameter', min: 0, max: 2048
+  describe 'resource-api' do
+    describe 'the tacacs_global type' do
+      it 'loads' do
+        expect(Puppet::Type.type(:tacacs_global)).not_to be_nil
+      end
+    end
   end
 end
