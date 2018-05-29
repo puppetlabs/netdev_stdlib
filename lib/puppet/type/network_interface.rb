@@ -71,7 +71,7 @@ else
       enable:      {
         type:    'Optional[Boolean]',
         desc:    'Whether this network interface should be enabled on the target system.',
-        default: 'false'
+        default: false
       },
       name:     {
         type:   'String',
