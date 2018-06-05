@@ -8,11 +8,20 @@ This module implements the type specification for the network device support
 program.  The goal of this module is to provide the Puppet types for writing
 provider implementations of these types for a specific network device model.
 
+The modules supports legacy Puppet and [Resource API](https://github.com/puppetlabs/puppet-resource_api) versions of the types.
+
+Both versions of the types perform the same in the catalog, but stricter type checking is enabled with RSAPI versions.
+
+Only one version can be loaded into an environment at a time.  On the master, RSAPI version of the types will always be loaded when Resource API gem is present.  This will be the default behavior in future versions of Puppet.
+
+On the agent, legacy types will be loaded if the operatingsystem is `aristaeos, ios_xr, or nexus`, otherwise RSAPI version is loaded.
+
 # Reference Information
 
 The following reference material is useful when developing providers for the
 types implemented in this module.
 
+ * [Resource API](https://github.com/puppetlabs/puppet-resource_api)
  * [Puppet Types and Providers by Dan Bode & Nan Liu][book]
  * [Custom Types Documentation][types doc]
  * [Seriously, What is this Provider Doing?][gary provider] Useful for an
@@ -1489,7 +1498,7 @@ For more information on rspec, please see https://github.com/rspec/rspec
 
 # License
 
-Copyright 2014-2017 [Puppet, Inc.][puppet]
+Copyright 2014-2018 [Puppet, Inc.][puppet]
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
 this file except in compliance with the License.  You may obtain a copy of the
