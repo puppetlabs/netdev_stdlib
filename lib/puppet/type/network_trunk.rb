@@ -91,6 +91,7 @@ else
     attributes: {
       ensure:      {
         type:    'Enum[present, absent]',
+        desc:    'Whether the network_trunk should be present or absent on the target system.',
         default: 'present'
       },
       name:     {
