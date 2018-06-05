@@ -1,6 +1,22 @@
 # Change log
 All notable changes to this project will be documented in this file.
 
+## 0.14.0 - 2018-06-05
+### Summary:
+This release adds [Resource API](https://github.com/puppetlabs/puppet-resource_api) versions of the types.
+
+Both versions of the types perform the same in the catalog, but stricter type checking is enabled with RSAPI versions.
+
+Only one version can be loaded into an environment at a time.  On the master, RSAPI version of the types will always be loaded when Resource API gem is present.  This will be the default behavior in future versions of Puppet.
+
+On the agent, legacy types will be loaded if the operatingsystem is `aristaeos, ios_xr, or nexus`, otherwise RSAPI version is loaded.
+
+### Added:
+- Resource API version of all types
+
+### Fixed:
+- `network_trunk` range of of `untagged_vlan` now 0-4095
+
 ## 0.13.0 - 2017-11-13
 ### Summary:
 This release enhances syslog, RADIUS, TACACS, and SNMP types
