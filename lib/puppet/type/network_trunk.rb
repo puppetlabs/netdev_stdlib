@@ -31,8 +31,8 @@ if PuppetX::NetdevStdlib::Check.use_old_netdev_type
       desc 'VLAN used for untagged VLAN traffic. a.k.a Native VLAN'
 
       validate do |value|
-        unless value.between?(1, 4095)
-          raise "value #{value.inspect} is not between 1 and 4095"
+        unless value.between?(0, 4095)
+          raise "value #{value.inspect} is not between 0 and 4095"
         end
       end
     end
@@ -64,7 +64,7 @@ if PuppetX::NetdevStdlib::Check.use_old_netdev_type
 
       validate do |value|
         unless value.between?(1, 4095)
-          raise "value #{value.inspect} is not between 1 and 4095"
+          raise "value #{value.inspect} is not between 0 and 4095"
         end
       end
 
@@ -108,7 +108,7 @@ else
         desc:   'The L2 interface mode, enables or disables trunking'
       },
       untagged_vlan:      {
-        type:    'Optional[Integer[1, 4095]]',
+        type:    'Optional[Integer[0, 4095]]',
         desc:    'VLAN used for untagged VLAN traffic. a.k.a Native VLAN'
       },
       tagged_vlans:      {
