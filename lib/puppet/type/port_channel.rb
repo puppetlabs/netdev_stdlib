@@ -93,7 +93,6 @@ else
       ensure:      {
         type:    'Enum[present, absent]',
         desc:    'Whether this port channel should be enabled on the target system.',
-        default: 'false'
       },
       name:     {
         type:   'String',
