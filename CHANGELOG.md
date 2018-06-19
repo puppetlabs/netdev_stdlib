@@ -1,6 +1,14 @@
 # Change log
 All notable changes to this project will be documented in this file.
 
+## 0.14.1 - 2018-06-19
+### Summary:
+This is a bugfix release
+
+### Fixed:
+- `port_channel` removed invalid default value
+- `snmp_notification_receiver` add `v2c` version
+
 ## 0.14.0 - 2018-06-05
 ### Summary:
 This release adds [Resource API](https://github.com/puppetlabs/puppet-resource_api) versions of the types.
