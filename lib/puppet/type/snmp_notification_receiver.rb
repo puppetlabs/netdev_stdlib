@@ -33,8 +33,8 @@ if PuppetX::NetdevStdlib::Check.use_old_netdev_type
     end
 
     newproperty(:version) do
-      desc 'SNMP version [v1|v2|v3]'
-      newvalues(:v1, :v2, :v3)
+      desc 'SNMP version [v1|v2|v2c|v3]'
+      newvalues(:v1, :v2, :v2c, :v3)
     end
 
     newproperty(:type) do
@@ -107,8 +107,8 @@ else
         desc:      'Username to use for SNMPv3 privacy and authentication. This is the community string for SNMPv1 and v2'
       },
       version:      {
-        type:      'Optional[Enum["v1","v2","v3"]]',
-        desc:      'SNMP version [v1|v2|v3]'
+        type:      'Optional[Enum["v1","v2","v2c","v3"]]',
+        desc:      'SNMP version [v1|v2|v2c|v3]'
       },
       type:       {
         type:      'Optional[Enum["traps","informs"]]',
