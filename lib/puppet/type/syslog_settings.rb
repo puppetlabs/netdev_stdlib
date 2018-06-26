@@ -30,6 +30,16 @@ if PuppetX::NetdevStdlib::Check.use_old_netdev_type
       end
     end
 
+    newproperty(:facility) do
+      desc 'Logging facility to use'
+
+      validate do |value|
+        if value.is_a? String then super(value)
+        else raise "value #{value.inspect} is invalid, must be a String."
+        end
+      end
+    end
+
     newproperty(:monitor) do
       desc "Monitor (terminal) logging severity level [0-7] or 'unset'"
 
@@ -85,6 +95,10 @@ else
       console:    {
         type:   'Optional[Variant[Integer[0,7], Enum["unset"]]]',
         desc:   "Console logging severity level [0-7] or 'unset'"
+      },
+      facility:    {
+        type:   'Optional[String]',
+        desc:   'Logging facility to use'
       },
       monitor:    {
         type:   'Optional[Variant[Integer[0,7], Enum["unset"]]]',

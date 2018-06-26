@@ -11,6 +11,7 @@ describe 'syslog_settings' do
 
       it_behaves_like 'name is the namevar'
       it_behaves_like 'enabled type'
+      it_behaves_like 'it has a string property', :facility
       it_behaves_like 'array of strings property', attribute: :source_interface
       it_behaves_like 'array of strings property', attribute: :vrf
 

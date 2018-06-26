@@ -18,6 +18,16 @@ if PuppetX::NetdevStdlib::Check.use_old_netdev_type
       end
     end
 
+    newproperty(:facility) do
+      desc 'Logging facility to use'
+
+      validate do |value|
+        if value.is_a? String then super(value)
+        else raise "value #{value.inspect} is invalid, must be a String."
+        end
+      end
+    end
+
     newproperty(:port, parent: PuppetX::PuppetLabs::NetdevStdlib::Property::PortRange) do
       desc 'Port number of remote syslog server'
 
@@ -66,6 +76,10 @@ else
         type:   'String',
         desc:   'Hostname or address of the server',
         behaviour: :namevar
+      },
+      facility:    {
+        type:   'Optional[String]',
+        desc:   'Logging facility to use'
       },
       port:    {
         type:   'Optional[Integer[1, 65535]]',
