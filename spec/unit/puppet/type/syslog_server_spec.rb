@@ -11,6 +11,7 @@ describe 'syslog_server' do
 
       it_behaves_like 'name is the namevar'
       it_behaves_like 'an ensurable type'
+      it_behaves_like 'it has a string property', :facility
       it_behaves_like 'it has a string property', :vrf
       it_behaves_like 'it has a string property', :source_interface
 
