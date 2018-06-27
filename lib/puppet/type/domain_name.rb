@@ -1,12 +1,13 @@
 require_relative '../../puppet_x/puppetlabs/netdev_stdlib/check'
 if PuppetX::NetdevStdlib::Check.use_old_netdev_type
   Puppet::Type.newtype(:domain_name) do
-    @doc = 'Configure the domain name of the device'
+    @doc = 'Deprecated - use network_dns instead.  Default domain name to append to the device hostname.'
 
     apply_to_all
     ensurable
 
     newparam(:name, namevar: true) do
+      Puppet.warning('domain_name type is deprecated - use network_dns instead.')
       desc 'The domain name of the device'
 
       validate do |value|
@@ -21,7 +22,7 @@ else
 
   Puppet::ResourceApi.register_type(
     name: 'domain_name',
-    docs: 'Configure the domain name of the device',
+    docs: 'Deprecated - use network_dns instead.  Default domain name to append to the device hostname.',
     features: ['remote_resource'],
     attributes: {
       ensure:       {
