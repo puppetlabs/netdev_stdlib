@@ -29,8 +29,6 @@ types implemented in this module.
    
 # Reference
 ## Resource types
-* [`domain_name`](#domain_name): Configure the domain name of the device
-* [`name_server`](#name_server): Configure the resolver to use the specified DNS server
 * [`network_dns`](#network_dns): Configure DNS settings for network devices
 * [`network_interface`](#network_interface): Manage physical network interfaces, e.g. Ethernet1
 * [`network_snmp`](#network_snmp): Manage snmp location, contact and enable SNMP on the device
@@ -44,7 +42,6 @@ types implemented in this module.
 * [`radius_global`](#radius_global): Configure global radius settings
 * [`radius_server`](#radius_server): Configure a radius server
 * [`radius_server_group`](#radius_server_group): Configure a radius server group
-* [`search_domain`](#search_domain): Configure the resolver to use the specified search domain
 * [`snmp_community`](#snmp_community): Manage the SNMP community
 * [`snmp_notification`](#snmp_notification): Enable or disable notification groups and events
 * [`snmp_notification_receiver`](#snmp_notification_receiver): Manage an SNMP notification receiver
@@ -56,9 +53,15 @@ types implemented in this module.
 * [`tacacs_server`](#tacacs_server): Configure a tacacs server
 * [`tacacs_server_group`](#tacacs_server_group): Configure a tacacs server group
 
+## Deprecated resource types
+The following types have been replaced by [`network_dns`](#network_dns)
+* [`domain_name`](#domain_name): Default domain name to append to the device hostname
+* [`name_server`](#name_server): Configure the resolver to use the specified DNS server
+* [`search_domain`](#search_domain): DNS suffix to search for FQDN entries
+
 #### domain_name
 
-Configure the domain name of the device.
+Deprecated - Default domain name to append to the device hostname.
 
 
 ##### Properties
@@ -86,7 +89,7 @@ The domain name of the device.
 
 #### name_server
 
-Configure the resolver to use the specified DNS server.
+Deprecated - Configure the resolver to use the specified DNS server.
 
 
 ##### Properties
@@ -728,7 +731,7 @@ The name of the radius server group.
 
 #### search_domain
 
-Configure the resolver to use the specified search domain.
+Deprecated - DNS suffix to search for FQDN entries.
 
 
 ##### Properties

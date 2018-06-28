@@ -1,12 +1,13 @@
 require_relative '../../puppet_x/puppetlabs/netdev_stdlib/check'
 if PuppetX::NetdevStdlib::Check.use_old_netdev_type
   Puppet::Type.newtype(:search_domain) do
-    @doc = 'Configure the resolver to use the specified search domain'
+    @doc = 'Deprecated - use network_dns instead.  DNS suffix to search for FQDN entries.'
 
     apply_to_all
     ensurable
 
     newparam(:name, namevar: true) do
+      Puppet.warning('search_domain type is deprecated - use network_dns instead.')
       desc 'The search domain to configure in the resolver'
 
       validate do |value|
@@ -21,7 +22,7 @@ else
 
   Puppet::ResourceApi.register_type(
     name: 'search_domain',
-    docs: 'Configure the resolver to use the specified search domain',
+    docs: 'Deprecated - use network_dns instead.  DNS suffix to search for FQDN entries.',
     features: ['remote_resource'],
     attributes: {
       ensure:       {
