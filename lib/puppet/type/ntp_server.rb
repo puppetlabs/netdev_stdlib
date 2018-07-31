@@ -25,7 +25,7 @@ if PuppetX::NetdevStdlib::Check.use_old_netdev_type
     end
 
     newproperty(:maxpoll) do
-      desc 'The maximul poll interval'
+      desc 'The maximum poll interval'
       munge { |v| Integer(v) }
     end
 
