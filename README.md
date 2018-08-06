@@ -29,6 +29,7 @@ types implemented in this module.
    
 # Reference
 ## Resource types
+* [`banner`](#banner): Configure banners for network devices
 * [`network_dns`](#network_dns): Configure DNS settings for network devices
 * [`network_interface`](#network_interface): Manage physical network interfaces, e.g. Ethernet1
 * [`network_snmp`](#network_snmp): Manage snmp location, contact and enable SNMP on the device
@@ -58,6 +59,26 @@ The following types have been replaced by [`network_dns`](#network_dns)
 * [`domain_name`](#domain_name): Default domain name to append to the device hostname
 * [`name_server`](#name_server): Configure the resolver to use the specified DNS server
 * [`search_domain`](#search_domain): DNS suffix to search for FQDN entries
+
+#### banner
+
+Set various banners on the device, for example motd.
+
+##### attributes
+
+The following attributes are available in the `banner` type.
+
+###### `name`
+
+namevar
+
+The friendly name for banner settings, it is set to default.
+
+Default value: default.
+
+###### `motd`
+
+The MOTD banner.
 
 #### domain_name
 
