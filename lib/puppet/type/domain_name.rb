@@ -25,12 +25,12 @@ else
     docs: 'Deprecated - use network_dns instead.  Default domain name to append to the device hostname.',
     features: ['remote_resource'],
     attributes: {
-      ensure:       {
+      ensure: {
         type:       'Enum[present, absent]',
         desc:       'Whether the name server should be present or absent on the target system.',
         default:    'present'
       },
-      name:         {
+      name: {
         type:      'String',
         desc:      'The domain name of the device',
         behaviour: :namevar

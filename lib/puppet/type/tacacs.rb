@@ -28,13 +28,13 @@ else
     docs: 'Enable or disable TACACS functionality',
     features: ['remote_resource'],
     attributes: {
-      name:         {
+      name: {
         type:      'String',
         desc:      'Resource name, not used to manage the device',
         behaviour: :namevar,
         default:   'default'
       },
-      enable:  {
+      enable: {
         type:      'Boolean',
         desc:      'Enable or disable TACACS functionality [true|false]'
       }

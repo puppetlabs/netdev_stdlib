@@ -43,17 +43,17 @@ else
     docs: 'Configure a RADIUS server group',
     features: ['remote_resource'],
     attributes: {
-      ensure:       {
+      ensure: {
         type:       'Enum[present, absent]',
         desc:       'Whether radius_server_group should be present or absent on the target system.',
         default:    'present'
       },
-      name:         {
+      name: {
         type:      'String',
         desc:      'The name of the RADIUS server group',
         behaviour: :namevar
       },
-      servers:         {
+      servers: {
         type:      'Optional[Array[String]]',
         desc:      'Array of DNS suffixes to search for FQDN entries'
       }

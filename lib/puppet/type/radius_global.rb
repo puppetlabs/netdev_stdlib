@@ -73,37 +73,37 @@ else
     docs: 'Configure global RADIUS settings',
     features: ['remote_resource'],
     attributes: {
-      name:         {
+      name: {
         type:       'String',
         desc:       'Resource name, not used to manage the device',
         behaviour:  :namevar,
         default:    'default'
       },
-      enable:    {
+      enable: {
         type:      'Optional[Boolean]',
         desc:      'Enable or disable RADIUS functionality [true|false]'
       },
-      key:    {
+      key: {
         type:      'Optional[String]',
         desc:      'Encryption key (plaintext or in hash form depending on key_format)'
       },
-      key_format:    {
+      key_format: {
         type:      'Optional[Integer]',
         desc:      'Encryption key format [0-7]'
       },
-      retransmit_count:    {
+      retransmit_count: {
         type:      'Optional[Integer]',
         desc:      'How many times to retransmit'
       },
-      source_interface:    {
+      source_interface: {
         type:      'Optional[Array[String]]',
         desc:      'The source interface used for RADIUS packets (array of strings for multiple).'
       },
-      timeout:    {
+      timeout: {
         type:      'Optional[Integer]',
         desc:      'Number of seconds before the timeout period ends'
       },
-      vrf:    {
+      vrf: {
         type:      'Optional[Array[String]]',
         desc:      'The VRF associated with source_interface (array of strings for multiple).'
       }

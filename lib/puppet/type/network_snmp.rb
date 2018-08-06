@@ -46,21 +46,21 @@ else
     docs: 'Manage snmp location, contact and enable SNMP on the device',
     features: ['remote_resource'],
     attributes: {
-      name:     {
+      name: {
         type:       'String',
         desc:       'Name, generally "default", not used to manage the resource',
         default:    'default',
         behaviour:  :namevar
       },
-      enable:    {
+      enable: {
         type:   'Optional[Boolean]',
         desc:   'Enable or disable SNMP functionality [true|false]'
       },
-      contact:    {
+      contact: {
         type:   'Optional[String]',
         desc:   'The contact name for this device'
       },
-      location:    {
+      location: {
         type:   'Optional[String]',
         desc:   'The location of this device'
       }

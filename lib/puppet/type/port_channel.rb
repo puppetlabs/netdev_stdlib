@@ -90,52 +90,52 @@ else
     docs: 'Network Device Link Aggregation Group',
     features: ['remote_resource'],
     attributes: {
-      ensure:      {
+      ensure: {
         type:    'Enum[present, absent]',
         desc:    'Whether this port channel should be enabled on the target system.',
       },
-      name:     {
+      name: {
         type:   'String',
         desc:   'LAG Name',
         behaviour: :namevar
       },
-      force:    {
+      force: {
         type:   'Optional[Boolean]',
         desc:   'Force configuration (true / false)'
       },
-      id:    {
+      id: {
         type:   'Optional[Integer]',
         desc:   'Channel Group ID, e.g. 10'
       },
-      description:    {
+      description: {
         type:   'Optional[String]',
         desc:   'Port Channel description'
       },
-      mode:      {
+      mode: {
         type:    'Optional[Enum["active","passive", "disabled"]]',
         desc:    'LACP mode [ passive | active | disabled* ]'
       },
-      interfaces:      {
+      interfaces: {
         type:    'Optional[Array[String]]',
         desc:    'Array of Physical Interfaces'
       },
-      minimum_links:    {
+      minimum_links: {
         type:   'Optional[Integer]',
         desc:   'Number of active links required for LAG to be up'
       },
-      speed:      {
+      speed: {
         type:    'Optional[Enum["auto","10m","100m","1g","10g","40g","56g","100g"]]',
         desc:    'Link speed [auto*|10m|100m|1g|10g|40g|56g|100g]'
       },
-      duplex:      {
+      duplex: {
         type:    'Optional[Enum["auto","full","half"]]',
         desc:    'Duplex mode [auto*|full|half]'
       },
-      flowcontrol_send:    {
+      flowcontrol_send: {
         type:   'Optional[Enum["desired","on","off"]]',
         desc:   'Flow control (send) [desired|on|off]'
       },
-      flowcontrol_receive:    {
+      flowcontrol_receive: {
         type:   'Optional[Enum["desired","on","off"]]',
         desc:   'Flow control (receive) [desired|on|off]'
       }

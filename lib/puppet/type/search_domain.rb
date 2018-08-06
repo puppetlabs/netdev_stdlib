@@ -25,12 +25,12 @@ else
     docs: 'Deprecated - use network_dns instead.  DNS suffix to search for FQDN entries.',
     features: ['remote_resource'],
     attributes: {
-      ensure:       {
+      ensure: {
         type:       'Enum[present, absent]',
         desc:       'Whether the name server should be present or absent on the target system.',
         default:    'present'
       },
-      name:         {
+      name: {
         type:      'String',
         desc:      'The search domain to configure in the resolver',
         behaviour: :namevar

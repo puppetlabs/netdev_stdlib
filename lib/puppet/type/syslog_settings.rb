@@ -83,36 +83,36 @@ else
     docs: 'Configure global syslog settings',
     features: ['remote_resource'],
     attributes: {
-      name:     {
+      name: {
         type:   'String',
         desc:   'Name, generally "default", not used to manage the resource',
         behaviour: :namevar
       },
-      enable:    {
+      enable: {
         type:   'Optional[Boolean]',
         desc:   'Enable or disable syslog logging [true|false]'
       },
-      console:    {
+      console: {
         type:   'Optional[Variant[Integer[0,7], Enum["unset"]]]',
         desc:   "Console logging severity level [0-7] or 'unset'"
       },
-      facility:    {
+      facility: {
         type:   'Optional[String]',
         desc:   'Logging facility to use'
       },
-      monitor:    {
+      monitor: {
         type:   'Optional[Variant[Integer[0,7], Enum["unset"]]]',
         desc:   "Monitor (terminal) logging severity level [0-7] or 'unset'"
       },
-      source_interface:      {
+      source_interface: {
         type:    'Optional[Array[String]]',
         desc:    'Source interface to send syslog data from, e.g. "ethernet 2/1"'
       },
-      time_stamp_units:      {
+      time_stamp_units: {
         type:    'Optional[Enum["seconds", "milliseconds"]]',
         desc:    'The unit to log time values in [seconds|milliseconds]'
       },
-      vrf:    {
+      vrf: {
         type:   'Optional[Array[String]]',
         desc:   'The VRF associated with source_interface (array of strings for multiple).'
       }

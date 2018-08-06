@@ -25,12 +25,12 @@ else
     docs: 'Deprecated - use network_dns instead.  Configure the resolver to use the specified DNS server',
     features: ['remote_resource'],
     attributes: {
-      ensure:       {
+      ensure: {
         type:       'Enum[present, absent]',
         desc:       'Whether the name server should be present or absent on the target system.',
         default:    'present'
       },
-      name:         {
+      name: {
         type:      'String',
         desc:      'The hostname or address of the DNS server',
         behaviour: :namevar

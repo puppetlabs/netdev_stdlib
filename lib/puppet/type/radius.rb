@@ -28,13 +28,13 @@ else
     docs: 'Enable or disable RADIUS functionality',
     features: ['remote_resource'],
     attributes: {
-      name:         {
+      name: {
         type:       'String',
         desc:       'Resource name, not used to manage the device',
         behaviour:  :namevar,
         default:    'default'
       },
-      enable:    {
+      enable: {
         type:      'Optional[Boolean]',
         desc:      'Enable or disable RADIUS functionality [true|false]'
       }
