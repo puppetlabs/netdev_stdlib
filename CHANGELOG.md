@@ -1,6 +1,23 @@
 # Change log
 All notable changes to this project will be documented in this file.
 
+## 0.15.0 - 2018-08-06
+### Summary:
+This release adds banner type, enhances syslog, and deprecates domain_name, name_server, search_domain
+
+### Added:
+- `banner` type
+  - motd
+- `syslog_server`
+  - facility
+- `syslog_settings`
+  - facility
+
+### Deprecated:
+- `domain_name` replaced by `network_dns`
+- `name_server` replaced by `network_dns`
+- `search_domain` replaced by `network_dns`
+
 ## 0.14.1 - 2018-06-19
 ### Summary:
 This is a bugfix release
