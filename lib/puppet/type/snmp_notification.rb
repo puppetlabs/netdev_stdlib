@@ -28,12 +28,12 @@ else
     docs: 'Enable or disable notification groups and events',
     features: ['remote_resource'],
     attributes: {
-      name:           {
+      name: {
         type:       'String',
         desc:       'The notification name or "all" for all notifications',
         behaviour:  :namevar
       },
-      enable:         {
+      enable: {
         type:      'Optional[Boolean]',
         desc:      'Enable or disable the notification [true|false]'
       }

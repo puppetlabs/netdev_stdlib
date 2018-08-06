@@ -60,17 +60,17 @@ else
     docs: 'Specify NTP config',
     features: ['remote_resource'],
     attributes: {
-      name:         {
+      name: {
         type:      'String',
         desc:      'Config name, default to "default" as the NTP config is global rather than instance based',
         behaviour: :namevar,
         default:   'default'
       },
-      authenticate:  {
+      authenticate: {
         type:      'Optional[Boolean]',
         desc:      'NTP authentication enabled [true|false]'
       },
-      source_interface:  {
+      source_interface: {
         type:      'Optional[String]',
         desc:      'The source interface for the NTP system'
       },

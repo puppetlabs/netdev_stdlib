@@ -47,21 +47,21 @@ else
     docs: 'NTP Authentication keys',
     features: ['remote_resource'],
     attributes: {
-      ensure:       {
+      ensure: {
         type:       'Enum[present, absent]',
         desc:       'Whether this NTP auth key should be present or absent on the target system.',
         default:    'present'
       },
-      name:         {
+      name: {
         type:      'String',
         desc:      'Authentication key ID',
         behaviour: :namevar
       },
-      algorithm:    {
+      algorithm: {
         type:      'Optional[Enum["md5","sha1","sha256"]]',
         desc:      'Algorithm eg. md5'
       },
-      mode:          {
+      mode: {
         type:      'Optional[Integer]',
         desc:      'Password mode [0 (plain) | 7 (encrypted)]'
       },

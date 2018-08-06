@@ -67,38 +67,38 @@ else
     docs: 'Specify an NTP server',
     features: ['remote_resource'],
     attributes: {
-      ensure:       {
+      ensure: {
         type:       'Enum[present, absent]',
         desc:       'Whether this NTP server should be present or absent on the target system.',
         default:    'present'
       },
-      name:         {
+      name: {
         type:      'String',
         desc:      'The hostname or address of the NTP server',
         behaviour: :namevar
       },
-      key:          {
+      key: {
         type:      'Optional[Integer[1, 65535]]',
         desc:      'Authentication key ID'
       },
-      maxpoll:      {
+      maxpoll: {
         type:      'Optional[Integer]',
         desc:      'The maximum poll interval'
       },
-      minpoll:      {
+      minpoll: {
         type:      'Optional[Integer]',
         desc:      'The minimum poll interval'
       },
-      prefer:       {
+      prefer: {
         type:      'Optional[Boolean]',
         desc:      'Prefer this NTP server [true|false]',
         default:   false
       },
-      source_interface:     {
+      source_interface: {
         type:      'Optional[String]',
         desc:      'The source interface used to reach the NTP server'
       },
-      vrf:          {
+      vrf: {
         type:      'Optional[String]',
         desc:      'The VRF instance this server is bound to.'
       }

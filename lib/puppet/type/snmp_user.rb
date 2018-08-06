@@ -108,50 +108,50 @@ else
     docs: 'Set the SNMP contact name',
     features: ['remote_resource'],
     attributes: {
-      ensure:       {
+      ensure: {
         type:       'Enum[present, absent]',
         desc:       'Whether the SNMP User should be present or absent on the target system.',
         default:    'present'
       },
       # TODO: NETDEV-36: composite namevars
-      name:         {
+      name: {
         type:       'String',
         desc:       'Composite ID of username / version (if applicable)',
         behaviour:  :namevar
       },
-      version:      {
+      version: {
         type:      'Optional[Enum["v1", "v2", "v2c", "v3"]]',
         desc:      'SNMP version [v1|v2|v2c|v3]'
       },
-      roles:        {
+      roles: {
         type:       'Optional[Array[String]]',
         desc:       'A list of roles associated with this SNMP user'
       },
-      auth:         {
+      auth: {
         type:      'Optional[Enum["md5", "sha"]]',
         desc:      'Authentication mode [md5|sha]'
       },
-      password:     {
+      password: {
         type:      'Optional[String]',
         desc:      'Cleartext password for the user'
       },
-      privacy:      {
+      privacy: {
         type:      'Optional[Enum["aes128", "aes192", "aes256", "des", "3des"]]',
         desc:      'Privacy encryption method [aes128|aes192|aes256|des|3des]'
       },
-      private_key:  {
+      private_key: {
         type:      'Optional[String]',
         desc:      'Private key in hexadecimal string'
       },
-      localized_key:  {
+      localized_key: {
         type:      'Optional[Boolean]',
         desc:      'If true, password needs to be a hexadecimal value [true|false]'
       },
-      enforce_privacy:  {
+      enforce_privacy: {
         type:      'Optional[Boolean]',
         desc:      'If true, message encryption is enforced [true|false]'
       },
-      engine_id:    {
+      engine_id: {
         type:      'Optional[String]',
         desc:      'Necessary if the SNMP engine is encrypting data'
       }

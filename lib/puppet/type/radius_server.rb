@@ -114,65 +114,65 @@ else
     docs: 'Configure a RADIUS server',
     features: ['remote_resource'],
     attributes: {
-      ensure:      {
+      ensure: {
         type:    'Enum[present, absent]',
         desc:    'Ensure the radius_server exists.',
         default: 'present'
       },
-      name:         {
+      name: {
         type:       'String',
         desc:       'The name of the RADIUS server',
         behaviour:  :namevar
       },
-      hostname:    {
+      hostname: {
         type:      'Optional[String]',
         desc:      'The hostname or address of the RADIUS server'
       },
-      auth_port:    {
+      auth_port: {
         type:      'Optional[Integer[1, 65535]]',
         desc:      'Port number to use for authentication'
       },
-      acct_port:    {
+      acct_port: {
         type:      'Optional[Integer[1, 65535]]',
         desc:      'Port number to use for accounting'
       },
-      key:    {
+      key: {
         type:      'Optional[String]',
         desc:      'Encryption key (plaintext or in hash form depending on key_format)'
       },
-      key_format:    {
+      key_format: {
         type:      'Optional[Integer]',
         desc:      'Encryption key format [0-7]'
       },
-      group:    {
+      group: {
         type:      'Optional[String]',
         desc:      'Server group associated with this server'
       },
-      deadtime:    {
+      deadtime: {
         type:      'Optional[Integer]',
         desc:      'Number of minutes to ignore an unresponsive server'
       },
-      timeout:    {
+      timeout: {
         type:      'Optional[Integer]',
         desc:      'Number of seconds before the timeout period ends'
       },
-      vrf:    {
+      vrf: {
         type:      'Optional[String]',
         desc:      'VRF to send syslog data from, e.g. "management"'
       },
-      source_interface:    {
+      source_interface: {
         type:      'Optional[String]',
         desc:      'Source interface to send syslog data from, e.g. "ethernet 2/1"'
       },
-      retransmit_count:    {
+      retransmit_count: {
         type:      'Optional[Integer]',
         desc:      'How many times to retransmit'
       },
-      accounting_only:    {
+      accounting_only: {
         type:      'Optional[Boolean]',
         desc:      'Enable this server for accounting only'
       },
-      authentication_only:    {
+      authentication_only: {
         type:      'Optional[Boolean]',
         desc:      'Enable this server for authentication only'
       }

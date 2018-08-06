@@ -67,33 +67,33 @@ else
     docs: 'Configure a remote syslog server for logging',
     features: ['remote_resource'],
     attributes: {
-      ensure:      {
+      ensure: {
         type:    'Enum[present, absent]',
         desc:    'Whether this syslog server should be present or absent on the target system.',
         default: 'present'
       },
-      name:     {
+      name: {
         type:   'String',
         desc:   'Hostname or address of the server',
         behaviour: :namevar
       },
-      facility:    {
+      facility: {
         type:   'Optional[String]',
         desc:   'Logging facility to use'
       },
-      port:    {
+      port: {
         type:   'Optional[Integer[1, 65535]]',
         desc:   'Port number of remote syslog server'
       },
-      severity_level:    {
+      severity_level: {
         type:   'Optional[Integer[1, 7]]',
         desc:   'Syslog severity level to log'
       },
-      vrf:    {
+      vrf: {
         type:   'Optional[String]',
         desc:   'VRF to send syslog data from, e.g. "management"'
       },
-      source_interface:      {
+      source_interface: {
         type:    'Optional[String]',
         desc:    'Source interface to send syslog data from, e.g. "ethernet 2/1"'
       }

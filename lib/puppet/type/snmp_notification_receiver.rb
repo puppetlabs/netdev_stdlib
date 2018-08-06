@@ -87,42 +87,42 @@ else
     docs: 'Manage an SNMP notification receiver',
     features: ['remote_resource'],
     attributes: {
-      ensure:       {
+      ensure: {
         type:       'Enum[present, absent]',
         desc:       'Whether the SNMP notification receiver should be present or absent on the target system.',
         default:    'present'
       },
       # TODO: NETDEV-36: composite namevars
-      name:           {
+      name: {
         type:       'String',
         desc:       'Composite ID of name / username / port (if applicable)',
         behaviour:  :namevar
       },
-      port:          {
+      port: {
         type:      'Optional[Integer[1, 65535]]',
         desc:      'SNMP UDP port number'
       },
-      username:      {
+      username: {
         type:      'Optional[String]',
         desc:      'Username to use for SNMPv3 privacy and authentication. This is the community string for SNMPv1 and v2'
       },
-      version:      {
+      version: {
         type:      'Optional[Enum["v1","v2","v2c","v3"]]',
         desc:      'SNMP version [v1|v2|v2c|v3]'
       },
-      type:       {
+      type: {
         type:      'Optional[Enum["traps","informs"]]',
         desc:      'The type of receiver [traps|informs]'
       },
-      security:     {
+      security: {
         type:      'Optional[Enum["auth","noauth","priv"]]',
         desc:      'SNMPv3 security mode [auth|noauth|priv]'
       },
-      vrf:          {
+      vrf: {
         type:      'Optional[String]',
         desc:      'VRF to send SNMP data from, e.g. "management"'
       },
-      source_interface:          {
+      source_interface: {
         type:      'Optional[String]',
         desc:      'Source interface to send SNMP data from, e.g. "ethernet 2/1"'
       }

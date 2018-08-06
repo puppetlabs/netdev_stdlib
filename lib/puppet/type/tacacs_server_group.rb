@@ -42,12 +42,12 @@ else
     docs: 'Configure a TACACS server group',
     features: ['remote_resource'],
     attributes: {
-      ensure:      {
+      ensure: {
         type:    'Enum[present, absent]',
         desc:    'Whether this TACACS server group should be present or absent on the target system.',
         default: 'present'
       },
-      name:         {
+      name: {
         type:      'String',
         desc:      'The name of the TACACS server group',
         behaviour: :namevar

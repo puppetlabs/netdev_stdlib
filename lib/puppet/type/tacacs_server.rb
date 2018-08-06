@@ -85,45 +85,45 @@ else
     docs: 'Configure a TACACS server',
     features: ['remote_resource'],
     attributes: {
-      ensure:      {
+      ensure: {
         type:    'Enum[present, absent]',
         desc:    'Whether this TACACS server should be present or absent on the target system.',
         default: 'present'
       },
-      name:     {
+      name: {
         type:   'String',
         desc:   'Name of the TACACS server',
         behaviour: :namevar
       },
-      hostname:    {
+      hostname: {
         type:   'Optional[String]',
         desc:   'The hostname or ipv4 address of the TACACS server'
       },
-      single_connection:    {
+      single_connection: {
         type:   'Optional[Boolean]',
         desc:   'Enable or disable session multiplexing [true|false]'
       },
-      vrf:    {
+      vrf: {
         type:      'Optional[String]',
         desc:      'Specifies the VRF instance used to communicate with the server'
       },
-      port:      {
+      port: {
         type:    'Optional[Integer[1, 65535]]',
         desc:    'The port of the TACACS server'
       },
-      key:      {
+      key: {
         type:    'Optional[String]',
         desc:    'Encryption key (plaintext or in hash form depending on key_format)'
       },
-      key_format:      {
+      key_format: {
         type:    'Optional[Integer]',
         desc:    'Encryption key format [0-7]'
       },
-      timeout:      {
+      timeout: {
         type:    'Optional[Integer]',
         desc:    'Number of seconds before the timeout period ends'
       },
-      group:      {
+      group: {
         type:    'Optional[String]',
         desc:    'Server group associated with this server'
       }

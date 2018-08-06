@@ -60,26 +60,26 @@ else
     docs: "Manage VLAN's.  Layer-2 VLAN's are managed by this resource type.",
     features: ['remote_resource'],
     attributes: {
-      ensure:      {
+      ensure: {
         type:    'Enum[present, absent]',
         desc:    'Whether this VLAN should be present or absent on the target system.',
         default: 'present'
       },
-      id:     {
+      id: {
         type:   'String',
         desc:   'The VLAN ID',
         behaviour: :namevar
       },
-      vlan_name:    {
+      vlan_name: {
         type:   'Optional[String]',
         desc:   'The VLAN name'
       },
-      shutdown:    {
+      shutdown: {
         type:      'Optional[Boolean]',
         desc:      'VLAN shutdown if true, not shutdown if false [true|false]',
         default:   false
       },
-      description:    {
+      description: {
         type:   'Optional[String]',
         desc:   "The VLAN Description, e.g. 'Engineering'"
       }

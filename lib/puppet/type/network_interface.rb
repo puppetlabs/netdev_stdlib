@@ -68,29 +68,29 @@ else
     docs: 'Manage physical network interfaces, e.g. Ethernet1',
     features: ['remote_resource'],
     attributes: {
-      enable:      {
+      enable: {
         type:    'Optional[Boolean]',
         desc:    'Whether this network interface should be enabled on the target system.',
         default: false
       },
-      name:     {
+      name: {
         type:   'String',
         desc:   'Interface Name, e.g. Ethernet1',
         behaviour: :namevar
       },
-      description:    {
+      description: {
         type:   'Optional[String]',
         desc:   'Interface physical port description'
       },
-      mtu:    {
+      mtu: {
         type:   'Optional[Integer]',
         desc:   'Interface Maximum Transmission Unit in bytes'
       },
-      speed:      {
+      speed: {
         type:    'Optional[Enum["auto","10m","100m","1g","10g","40g","56g","100g"]]',
         desc:    'Link speed [auto|10m|100m|1g|10g|40g|56g|100g]'
       },
-      duplex:      {
+      duplex: {
         type:    'Optional[Enum["auto","full","duplex"]]',
         desc:    'Duplex mode [auto|full|half]'
       }

@@ -78,26 +78,26 @@ else
     docs: 'Configure DNS settings for network devices',
     features: ['remote_resource'],
     attributes: {
-      ensure:       {
+      ensure: {
         type:       'Enum[present, absent]',
         desc:       'Whether the network dns should be present or absent on the target system.',
         default:    'present'
       },
-      name:         {
+      name: {
         type:      'String',
         desc:      'Name, generally "settings", not used to manage the resource',
         behaviour: :namevar,
         default:    'settings'
       },
-      domain:         {
+      domain: {
         type:      'Optional[String]',
         desc:      'The default domain name to append to the device hostname'
       },
-      search:         {
+      search: {
         type:      'Optional[Array[String]]',
         desc:      'Array of DNS suffixes to search for FQDN entries'
       },
-      servers:         {
+      servers: {
         type:      'Optional[Array[String]]',
         desc:      'Array of DNS servers to use for name resolution'
       }
