@@ -7,7 +7,12 @@ if PuppetX::NetdevStdlib::Check.use_old_netdev_type
 
     newparam(:name, namevar: true) do
       desc 'The banner resource. The name stays as "default"'
-      newvalues(:default)
+
+      validate do |value|
+        if value.is_a? String then super(value)
+        else raise "value #{value.inspect} is invalid, must be a String."
+        end
+      end
     end
 
     newproperty(:motd) do
