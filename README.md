@@ -157,6 +157,10 @@ Default value: present.
 
 The default domain name to add to the device hostname.
 
+###### `hostname`
+
+The hostname of the device
+
 ###### `search`
 
 Array of DNS suffixes to search for FQDN entries.

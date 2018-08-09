@@ -12,6 +12,7 @@ describe 'network_dns' do
 
       it_behaves_like 'the namevar is', :name
       it_behaves_like 'it has a string property', :domain
+      it_behaves_like 'it has a string property', :hostname
       it_behaves_like 'it has an array property', :servers
       it_behaves_like 'it has an array property', :search
     end

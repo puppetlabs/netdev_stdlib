@@ -26,6 +26,16 @@ if PuppetX::NetdevStdlib::Check.use_old_netdev_type
       end
     end
 
+    newproperty(:hostname) do
+      desc 'The hostname of the device'
+
+      validate do |value|
+        if value.is_a? String then super(value)
+        else raise "value #{value.inspect} is invalid, must be a String."
+        end
+      end
+    end
+
     newproperty(:search, array_matching: :all) do
       desc 'Array of DNS suffixes to search for FQDN entries'
 
@@ -92,6 +102,10 @@ else
       domain: {
         type:      'Optional[String]',
         desc:      'The default domain name to append to the device hostname'
+      },
+      hostname: {
+        type:      'Optional[String]',
+        desc:      'The host name of the device'
       },
       search: {
         type:      'Optional[Array[String]]',
