@@ -14,6 +14,7 @@ describe 'syslog_settings' do
       it_behaves_like 'it has a string property', :facility
       it_behaves_like 'array of strings property', attribute: :source_interface
       it_behaves_like 'array of strings property', attribute: :vrf
+      it_behaves_like 'it has a string property', :logfile_name
 
       describe 'console' do
         let(:attribute) { :console }
@@ -34,6 +35,33 @@ describe 'syslog_settings' do
         include_examples '#doc Documentation'
         include_examples 'accepts values', %w[seconds milliseconds]
         include_examples 'rejects values', %w[foo bar baz]
+      end
+
+      describe 'logfile_severity_level' do
+        let(:attribute) { :logfile_severity_level }
+        include_examples '#doc Documentation'
+        include_examples 'accepts values without munging', %w[0 unset]
+        include_examples 'rejects values', %w[foo -1 9]      end
+
+      describe 'logfile_size' do
+        let(:attribute) { :logfile_size }
+        include_examples '#doc Documentation'
+        include_examples 'accepts values without munging', %w[4096 unset]
+        include_examples 'rejects values', %w[foo -1 bar]
+      end
+
+      describe 'buffered_severity_level' do
+        let(:attribute) { :buffered_severity_level }
+        include_examples '#doc Documentation'
+        include_examples 'accepts values without munging', %w[0 unset]
+        include_examples 'rejects values', %w[foo -1 9]
+      end
+
+      describe 'buffered_size' do
+        let(:attribute) { :buffered_size }
+        include_examples '#doc Documentation'
+        include_examples 'accepts values without munging', %w[4096 unset]
+        include_examples 'rejects values', %w[foo -1 bar]
       end
     end
   end

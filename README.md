@@ -1057,6 +1057,26 @@ The unit to log time values in.
 
 The VRF associated with source_interface (array of strings for multiple).
 
+###### `logfile_severity_level`
+
+Logfile severity level [0-7] or 'unset'
+
+###### `logfile_name`
+
+Logfile file name to use or 'unset'
+
+###### `logfile_size`
+
+Logging file maximum size or 'unset'
+
+###### `buffered_severity_level`
+
+Buffered log severity level [0-7] or 'unset'
+
+###### `buffered_size`
+
+Logging buffer size or 'unset'
+
 ##### Parameters
 
 The following parameters are available in the `syslog_settings` type.
