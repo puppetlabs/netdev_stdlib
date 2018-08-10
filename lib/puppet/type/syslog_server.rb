@@ -86,7 +86,7 @@ else
         desc:   'Port number of remote syslog server'
       },
       severity_level: {
-        type:   'Optional[Integer[1, 7]]',
+        type:   'Optional[Integer[0, 7]]',
         desc:   'Syslog severity level to log'
       },
       vrf: {
