@@ -1,6 +1,25 @@
 # Change log
 All notable changes to this project will be documented in this file.
 
+## 0.16.0 - 2018-09-13
+### Summary:
+This release adds syslog_facility type, enhances network_dns and syslog_settings
+
+### Added:
+- `network_dns`
+  - hostname
+- `syslog_facility` type
+  - level
+- `syslog_settings`
+  - logfile_severity_level
+  - logfile_name
+  - logfile_size
+  - buffered_severity_level
+  - buffered_size
+
+### Fixed:
+- `banner` ensure value is String
+
 ## 0.15.0 - 2018-08-06
 ### Summary:
 This release adds banner type, enhances syslog, and deprecates domain_name, name_server, search_domain
