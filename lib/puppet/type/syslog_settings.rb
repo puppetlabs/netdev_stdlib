@@ -74,6 +74,56 @@ if PuppetX::NetdevStdlib::Check.use_old_netdev_type
         end
       end
     end
+
+    newproperty(:logfile_severity_level) do
+      desc "Logfile severity level [0-7] or 'unset'"
+
+      validate do |value|
+        if value.to_s.match('^[0-7]$') || value == 'unset' then super(value)
+        else raise "value #{value.inspect} is invalid, must be 0-7 or 'unset'"
+        end
+      end
+    end
+
+    newproperty(:logfile_name) do
+      desc "Logfile file name to use or 'unset'"
+
+      validate do |value|
+        if value.is_a? String then super(value)
+        else raise "value #{value.inspect} is invalid, must be a String."
+        end
+      end
+    end
+
+    newproperty(:logfile_size) do
+      desc "Logging file maximum size or 'unset'"
+
+      validate do |value|
+        if value.to_s.match('^\d+$') || value == 'unset' then super(value)
+        else raise "value #{value.inspect} is invalid, must be a valid integer or 'unset'"
+        end
+      end
+    end
+
+    newproperty(:buffered_severity_level) do
+      desc "Buffered log severity level [0-7] or 'unset'"
+
+      validate do |value|
+        if value.to_s.match('^[0-7]$') || value == 'unset' then super(value)
+        else raise "value #{value.inspect} is invalid, must be 0-7 or 'unset'"
+        end
+      end
+    end
+
+    newproperty(:buffered_size) do
+      desc "Logging buffer size or 'unset'"
+
+      validate do |value|
+        if value.to_s.match('^\d+$') || value == 'unset' then super(value)
+        else raise "value #{value.inspect} is invalid, must be a valid integer or 'unset'"
+        end
+      end
+    end
   end
 else
   require 'puppet/resource_api'
@@ -115,6 +165,26 @@ else
       vrf: {
         type:   'Optional[Array[String]]',
         desc:   'The VRF associated with source_interface (array of strings for multiple).'
+      },
+      logfile_severity_level: {
+        type:   'Optional[Variant[Integer[0,7], Enum["unset"]]]',
+        desc:   "Logfile severity level [0-7] or 'unset'"
+      },
+      logfile_name: {
+        type:   'Optional[String]',
+        desc:   "Logfile file name to use or 'unset'"
+      },
+      logfile_size: {
+        type:   'Optional[Integer]',
+        desc:   'Logging file maximum size'
+      },
+      buffered_severity_level: {
+        type:   'Optional[Variant[Integer[0,7], Enum["unset"]]]',
+        desc:   "Buffered log severity level [0-7] or 'unset'"
+      },
+      buffered_size: {
+        type:   'Optional[Integer]',
+        desc:   'Logging buffer size'
       }
     }
   )
