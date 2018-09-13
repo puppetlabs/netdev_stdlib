@@ -47,6 +47,7 @@ types implemented in this module.
 * [`snmp_notification`](#snmp_notification): Enable or disable notification groups and events
 * [`snmp_notification_receiver`](#snmp_notification_receiver): Manage an SNMP notification receiver
 * [`snmp_user`](#snmp_user): Set the SNMP contact name
+* [`syslog_facility`](#syslog_facility): Configure severity levels for global syslog facilities
 * [`syslog_server`](#syslog_server): Configure a remote syslog server for logging
 * [`syslog_settings`](#syslog_settings): Configure global syslog settings
 * [`tacacs`](#tacacs): Enable or disable tacacs functionality
@@ -978,6 +979,30 @@ If true, password needs to be a hexadecimal value.
 Valid values: `true`, `false`
 
 If true, message encryption is enforced.
+
+
+#### syslog_facility
+
+Configure severity levels for global syslog facilities.
+
+
+##### Properties
+
+The following properties are available in the `syslog_facility` type.
+
+###### `level`
+
+Syslog severity level to log.
+
+##### Parameters
+
+The following parameters are available in the `syslog_facility` type.
+
+###### `name`
+
+namevar
+
+Global facility to manage
 
 
 #### syslog_server
