@@ -86,7 +86,7 @@ else
   Puppet::ResourceApi.register_type(
     name: 'network_dns',
     docs: 'Configure DNS settings for network devices',
-    features: ['remote_resource'],
+    features: Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'],
     attributes: {
       ensure: {
         type:       'Enum[present, absent]',

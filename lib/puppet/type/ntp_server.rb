@@ -65,7 +65,7 @@ else
   Puppet::ResourceApi.register_type(
     name: 'ntp_server',
     docs: 'Specify an NTP server',
-    features: ['remote_resource'],
+    features: Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'],
     attributes: {
       ensure: {
         type:       'Enum[present, absent]',

@@ -71,7 +71,7 @@ else
   Puppet::ResourceApi.register_type(
     name: 'radius_global',
     docs: 'Configure global RADIUS settings',
-    features: ['remote_resource'],
+    features: Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'],
     attributes: {
       name: {
         type:       'String',
