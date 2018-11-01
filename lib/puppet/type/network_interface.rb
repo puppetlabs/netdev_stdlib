@@ -66,7 +66,7 @@ else
   Puppet::ResourceApi.register_type(
     name: 'network_interface',
     docs: 'Manage physical network interfaces, e.g. Ethernet1',
-    features: Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'],
+    features: ['canonicalize','simple_get_filter'] + ( Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'] ),
     attributes: {
       enable: {
         type:    'Optional[Boolean]',

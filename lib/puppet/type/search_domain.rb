@@ -23,7 +23,7 @@ else
   Puppet::ResourceApi.register_type(
     name: 'search_domain',
     docs: 'Deprecated - use network_dns instead.  DNS suffix to search for FQDN entries.',
-    features: ['remote_resource'],
+    features: ['canonicalize','simple_get_filter'] + ( Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'] ),
     attributes: {
       ensure: {
         type:       'Enum[present, absent]',

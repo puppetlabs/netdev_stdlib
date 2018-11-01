@@ -23,7 +23,7 @@ else
   Puppet::ResourceApi.register_type(
     name: 'domain_name',
     docs: 'Deprecated - use network_dns instead.  Default domain name to append to the device hostname.',
-    features: Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'],
+    features: ['canonicalize','simple_get_filter'] + ( Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'] ),
     attributes: {
       ensure: {
         type:       'Enum[present, absent]',

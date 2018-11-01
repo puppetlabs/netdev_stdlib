@@ -23,7 +23,7 @@ else
   Puppet::ResourceApi.register_type(
     name: 'name_server',
     docs: 'Deprecated - use network_dns instead.  Configure the resolver to use the specified DNS server',
-    features: Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'],
+    features: ['canonicalize','simple_get_filter'] + ( Puppet::Util::NetworkDevice.current.nil? ? ['remote_resource'] : [] ),
     attributes: {
       ensure: {
         type:       'Enum[present, absent]',

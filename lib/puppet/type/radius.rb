@@ -26,7 +26,7 @@ else
   Puppet::ResourceApi.register_type(
     name: 'radius',
     docs: 'Enable or disable RADIUS functionality',
-    features: ['remote_resource'],
+    features: ['canonicalize','simple_get_filter'] + ( Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'] ),
     attributes: {
       name: {
         type:       'String',

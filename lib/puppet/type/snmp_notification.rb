@@ -26,7 +26,7 @@ else
   Puppet::ResourceApi.register_type(
     name: 'snmp_notification',
     docs: 'Enable or disable notification groups and events',
-    features: ['remote_resource'],
+    features: ['canonicalize','simple_get_filter'] + ( Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'] ),
     attributes: {
       name: {
         type:       'String',

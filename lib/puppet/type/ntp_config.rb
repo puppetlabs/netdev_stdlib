@@ -58,7 +58,7 @@ else
   Puppet::ResourceApi.register_type(
     name: 'ntp_config',
     docs: 'Specify NTP config',
-    features: ['remote_resource'],
+    features: ['canonicalize','simple_get_filter'] + ( Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'] ),
     attributes: {
       name: {
         type:      'String',

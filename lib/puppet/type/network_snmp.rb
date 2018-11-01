@@ -44,7 +44,7 @@ else
   Puppet::ResourceApi.register_type(
     name: 'network_snmp',
     docs: 'Manage snmp location, contact and enable SNMP on the device',
-    features: ['remote_resource'],
+    features: ['canonicalize','simple_get_filter'] + ( Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'] ),
     attributes: {
       name: {
         type:       'String',

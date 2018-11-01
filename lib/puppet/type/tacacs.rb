@@ -26,7 +26,7 @@ else
   Puppet::ResourceApi.register_type(
     name: 'tacacs',
     docs: 'Enable or disable TACACS functionality',
-    features: ['remote_resource'],
+    features: ['canonicalize','simple_get_filter'] + ( Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'] ),
     attributes: {
       name: {
         type:      'String',

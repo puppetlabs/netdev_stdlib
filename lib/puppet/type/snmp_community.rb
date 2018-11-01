@@ -40,7 +40,7 @@ else
   Puppet::ResourceApi.register_type(
     name: 'snmp_community',
     docs: 'Manage the SNMP community',
-    features: ['remote_resource'],
+    features: ['canonicalize','simple_get_filter'] + ( Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'] ),
     attributes: {
       ensure: {
         type:       'Enum[present, absent]',
