@@ -112,7 +112,7 @@ else
   Puppet::ResourceApi.register_type(
     name: 'radius_server',
     docs: 'Configure a RADIUS server',
-    features: ['remote_resource'],
+    features: ['canonicalize','simple_get_filter'] + ( Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'] ),
     attributes: {
       ensure: {
         type:    'Enum[present, absent]',

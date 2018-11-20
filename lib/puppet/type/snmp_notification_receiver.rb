@@ -85,7 +85,7 @@ else
   Puppet::ResourceApi.register_type(
     name: 'snmp_notification_receiver',
     docs: 'Manage an SNMP notification receiver',
-    features: ['remote_resource'],
+    features: ['canonicalize','simple_get_filter'] + ( Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'] ),
     attributes: {
       ensure: {
         type:       'Enum[present, absent]',

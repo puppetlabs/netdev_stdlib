@@ -45,7 +45,7 @@ else
   Puppet::ResourceApi.register_type(
     name: 'ntp_auth_key',
     docs: 'NTP Authentication keys',
-    features: ['remote_resource'],
+    features: ['canonicalize','simple_get_filter'] + ( Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'] ),
     attributes: {
       ensure: {
         type:       'Enum[present, absent]',

@@ -43,6 +43,7 @@ group :development do
   gem 'pry',                                              require: false
   gem 'puppet-resource_api',                              require: false
   gem 'rspec-puppet',                                     require: false
+  gem 'shoulda-matchers', '~> 3.1',                       require: false
 end
 
 group :system_tests do

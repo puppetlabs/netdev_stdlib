@@ -87,7 +87,7 @@ else
   Puppet::ResourceApi.register_type(
     name: 'network_trunk',
     docs: 'Ethernet logical (switch-port) interface.  Configures VLAN trunking.',
-    features: ['remote_resource'],
+    features: ['canonicalize','simple_get_filter'] + ( Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'] ),
     attributes: {
       ensure: {
         type:    'Enum[present, absent]',

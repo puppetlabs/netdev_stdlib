@@ -106,7 +106,7 @@ else
   Puppet::ResourceApi.register_type(
     name: 'snmp_user',
     docs: 'Set the SNMP contact name',
-    features: ['remote_resource'],
+    features: ['canonicalize','simple_get_filter'] + ( Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'] ),
     attributes: {
       ensure: {
         type:       'Enum[present, absent]',

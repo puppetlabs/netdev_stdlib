@@ -88,7 +88,7 @@ else
   Puppet::ResourceApi.register_type(
     name: 'port_channel',
     docs: 'Network Device Link Aggregation Group',
-    features: ['remote_resource'],
+    features: ['canonicalize','simple_get_filter'] + ( Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'] ),
     attributes: {
       ensure: {
         type:    'Enum[present, absent]',

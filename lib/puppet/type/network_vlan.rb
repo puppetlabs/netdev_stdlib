@@ -58,7 +58,7 @@ else
   Puppet::ResourceApi.register_type(
     name: 'network_vlan',
     docs: "Manage VLAN's.  Layer-2 VLAN's are managed by this resource type.",
-    features: ['remote_resource'],
+    features: ['canonicalize','simple_get_filter'] + ( Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'] ),
     attributes: {
       ensure: {
         type:    'Enum[present, absent]',

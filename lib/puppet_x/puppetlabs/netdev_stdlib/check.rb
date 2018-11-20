@@ -11,7 +11,7 @@ module PuppetX::NetdevStdlib
         return true
       end
       # is this an agent running on a network device do no use RSAPI - there are only a few of them
-      use_old_netdev = %w[aristaeos ios_xr nexus].include? Facter.value('operatingsystem').downcase
+      use_old_netdev = %w[aristaeos ios_xr].include? Facter.value('operatingsystem').downcase
       use_old_netdev
     end
   end
