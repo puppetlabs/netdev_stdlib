@@ -1,6 +1,10 @@
 # Change log
 All notable changes to this project will be documented in this file.
 
+## 0.17.0 -  2018-11-20
+### Summary:
+This release adds support for dual mode (agentful + agentless) providers.
+
 ## 0.16.0 - 2018-09-13
 ### Summary:
 This release adds syslog_facility type, enhances network_dns and syslog_settings
