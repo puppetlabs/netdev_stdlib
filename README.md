@@ -14,7 +14,7 @@ Both versions of the types perform the same in the catalog, but stricter type ch
 
 Only one version can be loaded into an environment at a time.  On the master, RSAPI version of the types will always be loaded when Resource API gem is present.  This will be the default behavior in future versions of Puppet.
 
-On the agent, legacy types will be loaded if the operatingsystem is `aristaeos, ios_xr, or nexus`, otherwise RSAPI version is loaded.
+On the agent, legacy types will be loaded if the operatingsystem is `aristaeos or ios_xr`, otherwise RSAPI version is loaded.
 
 # Reference Information
 
@@ -26,7 +26,7 @@ types implemented in this module.
  * [Custom Types Documentation][types doc]
  * [Seriously, What is this Provider Doing?][gary provider] Useful for an
    in-depth explanation of the instances class method for each provider.
-   
+
 # Reference
 ## Resource types
 * [`banner`](#banner): Configure banners for network devices
