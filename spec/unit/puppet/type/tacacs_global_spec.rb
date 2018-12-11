@@ -21,12 +21,15 @@ describe 'tacacs_global' do
 
       describe 'timeout' do
         let(:attribute) { :timeout }
-        include_examples 'numeric parameter', min: 0, max: 604_800
+        include_examples '#doc Documentation'
+        include_examples 'accepts values without munging', %w[0 604800 unset]
+        include_examples 'rejects values', %w[foo -1 bar]
       end
 
       describe 'retransmit_count' do
         let(:attribute) { :retransmit_count }
-        include_examples 'numeric parameter', min: 0, max: 2048
+        include_examples 'accepts values without munging', %w[0 2048 unset]
+        include_examples 'rejects values', %w[foo -1 bar]
       end
     end
   end
