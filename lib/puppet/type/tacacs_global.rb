@@ -90,7 +90,7 @@ else
         desc:      'Encryption key (plaintext or in hash form depending on key_format)'
       },
       key_format: {
-        type:      'Optional[Integer]',
+        type:      'Optional[Variant[Integer, Enum["unset"]]]',
         desc:      'Encryption key format [0-7]'
       },
       retransmit_count: {
@@ -102,7 +102,7 @@ else
         desc:      'The source interface used for TACACS packets (array of strings for multiple).'
       },
       timeout: {
-        type:      'Optional[Integer]',
+        type:      'Optional[Variant[Integer, Enum["unset"]]]',
         desc:      'Number of seconds before the timeout period ends'
       },
       vrf: {

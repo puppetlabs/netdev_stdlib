@@ -141,7 +141,7 @@ else
         desc:      'Encryption key (plaintext or in hash form depending on key_format)'
       },
       key_format: {
-        type:      'Optional[Integer]',
+        type:      'Optional[Variant[Integer, Enum["unset"]]]',
         desc:      'Encryption key format [0-7]'
       },
       group: {
@@ -153,7 +153,7 @@ else
         desc:      'Number of minutes to ignore an unresponsive server'
       },
       timeout: {
-        type:      'Optional[Integer]',
+        type:      'Optional[Variant[Integer, Enum["unset"]]]',
         desc:      'Number of seconds before the timeout period ends'
       },
       vrf: {
@@ -165,7 +165,7 @@ else
         desc:      'Source interface to send syslog data from, e.g. "ethernet 2/1"'
       },
       retransmit_count: {
-        type:      'Optional[Integer]',
+        type:      'Optional[Variant[Integer, Enum["unset"]]]',
         desc:      'How many times to retransmit'
       },
       accounting_only: {

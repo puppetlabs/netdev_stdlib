@@ -99,7 +99,7 @@ else
         behaviour:  :namevar
       },
       port: {
-        type:      'Optional[Integer[1, 65535]]',
+        type:      'Optional[Variant[Integer[1, 65535], Enum["unset"], Integer[-1, -1]]]',
         desc:      'SNMP UDP port number'
       },
       username: {
