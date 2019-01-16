@@ -614,7 +614,7 @@ Encryption key format [0-7].
 
 ###### `retransmit_count`
 
-How many times to retransmit.
+How many times to retransmit or 'unset' (Cisco Nexus only)
 
 ###### `source_interface`
 
@@ -622,7 +622,7 @@ The source interface used for RADIUS packets (array of strings for multiple).
 
 ###### `timeout`
 
-Number of seconds before the timeout period ends.
+Number of seconds before the timeout period ends or 'unset' (Cisco Nexus only)f
 
 ###### `vrf`
 
@@ -1168,7 +1168,7 @@ Encryption key format [0-7].
 
 ###### `retransmit_count`
 
-How many times to retransmit.
+How many times to retransmit or 'unset' (Cisco Nexus only)
 
 ###### `source_interface`
 
@@ -1176,7 +1176,7 @@ The source interface used for TACACS packets (array of strings for multiple).
 
 ###### `timeout`
 
-Number of seconds before the timeout period ends.
+Number of seconds before the timeout period ends or 'unset' (Cisco Nexus only)
 
 ###### `vrf`
 

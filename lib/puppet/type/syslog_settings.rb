@@ -143,7 +143,7 @@ else
         desc:   'Enable or disable syslog logging [true|false]'
       },
       console: {
-        type:   'Optional[Variant[Integer[0,7], Enum["unset"]]]',
+        type:   'Optional[Variant[Integer[0,7], Integer[-1, -1], Enum["unset"]]]',
         desc:   "Console logging severity level [0-7] or 'unset'"
       },
       facility: {
@@ -151,7 +151,7 @@ else
         desc:   'Logging facility to use'
       },
       monitor: {
-        type:   'Optional[Variant[Integer[0,7], Enum["unset"]]]',
+        type:   'Optional[Variant[Integer[0,7], Integer[-1, -1], Enum["unset"]]]',
         desc:   "Monitor (terminal) logging severity level [0-7] or 'unset'"
       },
       source_interface: {
@@ -167,7 +167,7 @@ else
         desc:   'The VRF associated with source_interface (array of strings for multiple).'
       },
       logfile_severity_level: {
-        type:   'Optional[Variant[Integer[0,7], Enum["unset"]]]',
+        type:   'Optional[Variant[Integer[0,7], Integer[-1, -1], Enum["unset"]]]',
         desc:   "Logfile severity level [0-7] or 'unset'"
       },
       logfile_name: {
@@ -179,7 +179,7 @@ else
         desc:   'Logging file maximum size'
       },
       buffered_severity_level: {
-        type:   'Optional[Variant[Integer[0,7], Enum["unset"]]]',
+        type:   'Optional[Variant[Integer[0,7], Integer[-1, -1], Enum["unset"]]]',
         desc:   "Buffered log severity level [0-7] or 'unset'"
       },
       buffered_size: {

@@ -37,7 +37,12 @@ if PuppetX::NetdevStdlib::Check.use_old_netdev_type
 
     newproperty(:retransmit_count) do
       desc 'How many times to retransmit'
-      munge { |v| Integer(v) }
+
+      validate do |value|
+        if value.to_s.match('^\d+$') || value == 'unset' then super(value)
+        else raise "value #{value.inspect} is invalid, must be a valid integer or 'unset'"
+        end
+      end
     end
 
     newproperty(:source_interface, array_matching: :all) do
@@ -52,7 +57,12 @@ if PuppetX::NetdevStdlib::Check.use_old_netdev_type
 
     newproperty(:timeout) do
       desc 'Number of seconds before the timeout period ends'
-      munge { |v| Integer(v) }
+
+      validate do |value|
+        if value.to_s.match('^\d+$') || value == 'unset' then super(value)
+        else raise "value #{value.inspect} is invalid, must be a valid integer or 'unset'"
+        end
+      end
     end
 
     newproperty(:vrf, array_matching: :all) do
@@ -92,16 +102,16 @@ else
         desc:      'Encryption key format [0-7]'
       },
       retransmit_count: {
-        type:      'Optional[Integer]',
-        desc:      'How many times to retransmit'
+        type:      'Optional[Variant[Integer, Enum["unset"]]]',
+        desc:      "How many times to retransmit or 'unset' (Cisco Nexus only)"
       },
       source_interface: {
         type:      'Optional[Array[String]]',
         desc:      'The source interface used for RADIUS packets (array of strings for multiple).'
       },
       timeout: {
-        type:      'Optional[Integer]',
-        desc:      'Number of seconds before the timeout period ends'
+        type:      'Optional[Variant[Integer, Enum["unset"]]]',
+        desc:      "Number of seconds before the timeout period ends or 'unset' (Cisco Nexus only)"
       },
       vrf: {
         type:      'Optional[Array[String]]',
