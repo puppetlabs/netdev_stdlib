@@ -175,7 +175,7 @@ else
         desc:   "Logfile file name to use or 'unset'"
       },
       logfile_size: {
-        type:   'Optional[Integer]',
+        type:   'Optional[Variant[Integer, Enum["unset"]]]',
         desc:   'Logging file maximum size'
       },
       buffered_severity_level: {
@@ -183,7 +183,7 @@ else
         desc:   "Buffered log severity level [0-7] or 'unset'"
       },
       buffered_size: {
-        type:   'Optional[Integer]',
+        type:   'Optional[Variant[Integer, Enum["unset"]]]',
         desc:   'Logging buffer size'
       }
     }
