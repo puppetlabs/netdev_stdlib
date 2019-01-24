@@ -1,6 +1,10 @@
 # Change log
 All notable changes to this project will be documented in this file.
 
+## 0.18.0 - 2019-01-25
+### Summary:
+This release adds support for unsetting appropriate values on Cisco Nexus devices.
+
 ## 0.17.0 -  2018-11-20
 ### Summary:
 This release adds support for dual mode (agentful + agentless) providers.
