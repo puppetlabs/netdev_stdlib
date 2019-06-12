@@ -17,5 +17,8 @@
   "requirements": [
 
   ],
+  "tags": [
+    "network"
+  ],
   "description": "Type definitions for Networking Device (NetDev) Standard Library"
 }
