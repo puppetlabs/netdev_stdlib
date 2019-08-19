@@ -19,6 +19,16 @@ if PuppetX::NetdevStdlib::Check.use_old_netdev_type
       desc 'The MOTD banner'
       munge { |v| String(v) }
     end
+
+    newproperty(:login) do
+      desc 'The Login banner'
+      munge { |v| String(v) }
+    end
+
+    newproperty(:exec) do
+      desc 'The EXEC banner'
+      munge { |v| String(v) }
+    end
   end
 else
   require 'puppet/resource_api'
@@ -35,8 +45,16 @@ else
         default: 'default',
       },
       motd:      {
-        type:    'String',
+        type:    'Optional[Variant[String, Enum["unset"]]]',
         desc:    'The MOTD banner',
+      },
+      login:      {
+        type:    'Optional[Variant[String, Enum["unset"]]]',
+        desc:    'The Login banner',
+      },
+      exec:      {
+        type:    'Optional[Variant[String, Enum["unset"]]]',
+        desc:    'The EXEC banner',
       },
     }
   )
