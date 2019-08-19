@@ -81,6 +81,14 @@ Default value: default.
 
 The MOTD banner.
 
+###### `login`
+
+The Login banner.
+
+###### `exec`
+
+The EXEC banner.
+
 #### domain_name
 
 Deprecated - Default domain name to append to the device hostname.
