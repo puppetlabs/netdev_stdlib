@@ -54,6 +54,7 @@ types implemented in this module.
 * [`tacacs_global`](#tacacs_global): Configure global tacacs settings
 * [`tacacs_server`](#tacacs_server): Configure a tacacs server
 * [`tacacs_server_group`](#tacacs_server_group): Configure a tacacs server group
+* [`vrf`](#vrf): Configure a VRF
 
 ## Deprecated resource types
 The following types have been replaced by [`network_dns`](#network_dns)
@@ -1293,6 +1294,38 @@ The following parameters are available in the `tacacs_server_group` type.
 namevar
 
 The name of the tacacs server group.
+
+#### vrf
+
+Configure a VRF.
+
+##### Parameters
+
+The following parameters are available in the `vrf` type.
+
+###### `name`
+
+namevar
+
+The name of the VRF.
+
+##### `route_distinguisher`
+
+Optional[String]
+
+Address qualifier for the VRF, used to amintain uniqueness among identical routes.
+
+##### `route_target`
+
+Optional[Array[Tuple[Enum["export", "import", "both"], String]]]
+
+Address qualifier for the VRF, used to share routes between multiple VRFs.
+
+##### `import_map`
+
+Optional[String]
+
+Associates a route map with the VRF.
 
 # Getting Started for Development
 
