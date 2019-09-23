@@ -1,6 +1,17 @@
 # Change log
 All notable changes to this project will be documented in this file.
 
+## 0.20.0 - 2019-09-23
+### Summary:
+This release adds support for the `vrf` type. 
+
+### Added:
+- `vrf`
+  - name
+  - route_distinguisher
+  - route_targets
+  - import_map
+
 ## 0.19.0 - 2019-08-19
 ### Summary:
 This release adds support for additional attributes to the `banner` type, while also updating the existing attribute to explicitly support a value of `unset` and adding a tag to aid in forge searches.
