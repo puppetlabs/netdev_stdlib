@@ -1,9 +1,17 @@
 # Change log
 All notable changes to this project will be documented in this file.
 
+## 0.21.0 - 2019-09-24
+### Summary:
+This release adds support for an additional attribute to the `vrf` type.
+
+### Added:
+- `vrf`
+  - ensure
+
 ## 0.20.0 - 2019-09-23
 ### Summary:
-This release adds support for the `vrf` type. 
+This release adds support for the `vrf` type.
 
 ### Added:
 - `vrf`
