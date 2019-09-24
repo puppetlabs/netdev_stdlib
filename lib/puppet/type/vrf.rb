@@ -5,6 +5,11 @@ require 'puppet/resource_api'
     docs: 'Configure VRF settings',
     features: ['canonicalize','simple_get_filter'] + ( Puppet::Util::NetworkDevice.current.nil? ? [] : ['remote_resource'] ),
     attributes: {
+      ensure: {
+        type:    'Enum[present, absent]',
+        desc:    'Whether this VRF should be present or absent on the target system.',
+        default: 'present'
+      },
       name: {
         type:   'String',
         desc:   'Name of VRF instance',
