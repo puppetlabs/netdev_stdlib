@@ -509,6 +509,14 @@ The basic property that the resource should be in.
 
 Default value: present.
 
+###### `ensure`
+
+Valid values: present, absent.
+
+The basic property that the resource should be in.
+
+Default value: present.
+
 ###### `id`
 
 Channel Group ID, for example, 10.
