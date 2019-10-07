@@ -33,6 +33,26 @@ if PuppetX::NetdevStdlib::Check.use_old_netdev_type
         self.class.format_value_for_display(current_value)
       end
     end
+
+    newproperty(:source_interface) do
+      desc 'The source interface used for TACACS packets'
+
+      validate do |value|
+        if value.is_a? String then super(value)
+        else raise "value #{value.inspect} is invalid, must be a String."
+        end
+      end
+    end
+
+    newproperty(:vrf) do
+      desc 'The VRF associated with source_interface'
+
+      validate do |value|
+        if value.is_a? String then super(value)
+        else raise "value #{value.inspect} is invalid, must be a String."
+        end
+      end
+    end
   end
 else
   require 'puppet/resource_api'
@@ -55,6 +75,14 @@ else
       servers: {
         type:      'Optional[Array[String]]',
         desc:      'String of servers associated with this group'
+      },
+      source_interface: {
+        type:      'Optional[String]',
+        desc:      'The source interface used for TACACS packets.'
+      },
+      vrf: {
+        type:      'Optional[String]',
+        desc:      'The VRF associated with source_interface.'
       }
     }
   )
