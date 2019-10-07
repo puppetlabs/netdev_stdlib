@@ -1293,6 +1293,14 @@ Default value: present
 
 Array of servers associated with this group.
 
+###### `source_interface`
+
+The source interface used for TACACS packets.
+
+###### `vrf`
+
+The VRF associated with source_interface.
+
 ##### Parameters
 
 The following parameters are available in the `tacacs_server_group` type.
