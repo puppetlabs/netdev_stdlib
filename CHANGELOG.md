@@ -1,6 +1,15 @@
 # Change log
 All notable changes to this project will be documented in this file.
 
+## 0.22.0 - 2019-10-07
+### Summary:
+This release adds support for two additional attributes to the `tacacs_server_group` type.
+
+### Added:
+- `tacacs_server_group`
+  - source_interface
+  - vrf
+
 ## 0.21.0 - 2019-09-24
 ### Summary:
 This release adds support for an additional attribute to the `vrf` type.
