@@ -118,7 +118,11 @@ else
       vrf: {
         type:      'Optional[Array[String]]',
         desc:      'The VRF associated with source_interface (array of strings for multiple).'
-      }
+      },
+      directed_request: {
+        type:      'Optional[Boolean]',
+        desc:      "Whether to allow users to specify tacacs server to use with `@server'."
+      },
     }
   )
 end
