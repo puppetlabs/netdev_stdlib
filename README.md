@@ -1199,6 +1199,12 @@ Number of seconds before the timeout period ends or 'unset' (Cisco Nexus only)
 
 The VRF associated with source_interface (array of strings for multiple).
 
+###### `directed_request`
+
+Valid values: `true`, `false`.
+
+Whether to allow users to specify tacacs server to use with `@server'.
+
 ##### Parameters
 
 The following parameters are available in the `tacacs_global` type.
